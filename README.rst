@@ -10,7 +10,7 @@ A python-based version of `LACosmic`_.
   :target: https://coveralls.io/r/larrybradley/lacosmic
 
 .. image:: https://readthedocs.org/projects/lacosmic/badge/?version=latest
-  :target: http://lacosmic.readthedocs.org/
+  :target: http://lacosmic.readthedocs.io/
   :alt: Latest Documentation Status
 
 .. _photutils: https://github.com/astropy/photutils
