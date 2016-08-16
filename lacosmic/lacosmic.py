@@ -1,7 +1,7 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import numpy as np
-from .extern import imageutils
+from astropy.nddata.utils import block_reduce, block_replicate
 from astropy import log
 
 
@@ -120,10 +120,10 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
 
     ncosmics, ncosmics_tot = 0, 0
     for iteration in range(maxiter):
-        sampled_img = imageutils.upsample(clean_data, block_size)
+        sampled_img = block_replicate(clean_data, block_size)
         convolved_img = ndimage.convolve(sampled_img, kernel,
                                          mode=border_mode).clip(min=0.0)
-        laplacian_img = imageutils.downsample(convolved_img, block_size)
+        laplacian_img = block_reduce(convolved_img, block_size)
 
         if clean_error_image is None:
             if effective_gain is None or readnoise is None:
