@@ -10,6 +10,11 @@ algorithm is based on Laplacian edge detection and is described in
 
 .. _PASP 113, 1420 (2001): http://adsabs.harvard.edu/abs/2001PASP..113.1420V
 
+.. toctree::
+    :maxdepth: 2
+
+    changelog.rst
+
 
 Requirements
 ============
