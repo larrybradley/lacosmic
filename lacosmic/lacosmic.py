@@ -229,6 +229,7 @@ def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
 
 def _local_median(data_nanmask, x, y, nx, ny, size=5, expanded=False):
     """Compute the local median in a 2D window, excluding NaN."""
+
     hy, hx = size // 2, size // 2
     x0, x1 = np.array([x - hx, x + hx + 1]).clip(0, nx)
     y0, y1 = np.array([y - hy, y + hy + 1]).clip(0, ny)

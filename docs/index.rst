@@ -23,6 +23,24 @@ Requirements
 * `Astropy`_ 1.1 or later
 
 
+Installation
+============
+
+The latest released (stable) version of lacosmic can be installed with
+`pip`_::
+
+    pip install --no-deps lacosmic
+
+.. note::
+
+    The ``--no-deps`` flag is optional, but highly recommended if you
+    already have Numpy and Astropy installed, since otherwise pip will
+    sometimes try to "help" you by upgrading your Numpy and Astropy
+    installations, which may not always be desired.
+
+.. _pip: https://pip.pypa.io/en/latest/
+
+
 Reference/API
 =============
 
