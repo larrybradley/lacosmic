@@ -1,6 +1,12 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
+from distutils.version import LooseVersion
 import numpy as np
+
+import astropy
+if LooseVersion(astropy.__version__) < LooseVersion('1.1'):
+    raise ImportError('lacosmic requires astropy >= 1.1')
+
 from astropy.nddata.utils import block_reduce, block_replicate
 from astropy import log
 

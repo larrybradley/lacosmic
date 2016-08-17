@@ -12,6 +12,11 @@ try:
 except ImportError:
     HAS_SCIPY = False
 
+import astropy
+if LooseVersion(astropy.__version__) < LooseVersion('1.1'):
+    ASTROPY_LT_1P1 = True
+else:
+    ASTROPY_LT_1P1 = False
 
 IMG = np.random.RandomState(1234567890).randn(5, 5) * 0.5
 x, y = [0, 3, 4, 2, 1], [0, 2, 1, 4, 2]
@@ -22,6 +27,7 @@ CR_IMG = IMG + CR
 
 
 @pytest.mark.skipif('not HAS_SCIPY')
+@pytest.mark.skipif('ASTROPY_LT_1P1')
 class TestLACosmic(object):
     def test_lacosmic(self):
         """Test basic lacosmic."""
