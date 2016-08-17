@@ -1,6 +1,7 @@
-
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
 """
-lacosmic
+Package to remove cosmic rays from an astronomical image using the
+L.A.Cosmic (PASP 113, 1420, 2001) algorithm.
 """
 
 # Affiliated packages may add whatever they like to this file, but
@@ -9,6 +10,5 @@ lacosmic
 from ._astropy_init import *
 # ----------------------------------------------------------------------------
 
-# For egg_info test builds to pass, put package imports here.
 if not _ASTROPY_SETUP_:
-    from lacosmic import *
+    from .lacosmic import *

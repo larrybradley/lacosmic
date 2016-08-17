@@ -10,11 +10,6 @@ algorithm is based on Laplacian edge detection and is described in
 
 .. _PASP 113, 1420 (2001): http://adsabs.harvard.edu/abs/2001PASP..113.1420V
 
-.. toctree::
-    :maxdepth: 2
-
-    changelog.rst
-
 
 Requirements
 ============
@@ -46,7 +41,11 @@ The latest released (stable) version of lacosmic can be installed with
 .. _pip: https://pip.pypa.io/en/latest/
 
 
-Reference/API
-=============
+User Documentation
+==================
 
-.. automodapi:: lacosmic
+.. toctree::
+    :maxdepth: 1
+
+    lacosmic/index.rst
+    changelog.rst

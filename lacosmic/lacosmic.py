@@ -1,3 +1,9 @@
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+"""
+Module to remove cosmic rays from an astronomical image using the
+L.A.Cosmic (PASP 113, 1420, 2001) algorithm.
+"""
+
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 from distutils.version import LooseVersion
