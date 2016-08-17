@@ -54,10 +54,6 @@ matrix:
           env: ASTROPY_VERSION=development
         - python: 3.5
           env: ASTROPY_VERSION=development
-        - python: 2.7
-          env: ASTROPY_VERSION=lts
-        - python: 3.5
-          env: ASTROPY_VERSION=lts
 
         # Python 2.6 and 3.3 doesn't have numpy 1.10 in conda, they can be put
         # back into the main matrix once the numpy build is available in the
