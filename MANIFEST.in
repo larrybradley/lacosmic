@@ -1,11 +1,13 @@
+include LICENSE.rst
 include README.rst
 include CHANGES.rst
 
 include ez_setup.py
 include ah_bootstrap.py
 include setup.cfg
+include lacosmic/tests/coveragerc
 
-recursive-include *.pyx *.c *.pxd
+recursive-include lacosmic *.pyx *.c *.pxd
 recursive-include docs *
 recursive-include licenses *
 recursive-include cextern *
