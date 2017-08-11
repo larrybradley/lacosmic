@@ -1,15 +1,16 @@
 [run]
 source = lacosmic
-
 omit =
-    lacosmic/*__init__*
-    lacosmic/_astropy_init.py
-    lacosmic/conftest*
-    lacosmic/cython_version*
-    lacosmic/extern*
-    lacosmic/*setup*
-    lacosmic/*tests/*
-    lacosmic/version*
+   lacosmic/_astropy_init*
+   lacosmic/conftest*
+   lacosmic/cython_version*
+   lacosmic/setup_package*
+   lacosmic/*/setup_package*
+   lacosmic/*/*/setup_package*
+   lacosmic/tests/*
+   lacosmic/*/tests/*
+   lacosmic/*/*/tests/*
+   lacosmic/version*
 
 [report]
 exclude_lines =
