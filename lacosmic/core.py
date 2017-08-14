@@ -40,7 +40,7 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         data), a value of 4 or 5 (or more) is more appropriate.  If your
         image is oversampled, use a value between 1 and 2.  For details,
         please see `PASP 113, 1420 (2001)`_, which calls this parameter
-        :math:`f_{\mbox{lim}}`.  In particular, Figure 4 shows the
+        :math:`f_{\\mbox{lim}}`.  In particular, Figure 4 shows the
         approximate relationship between the ``contrast`` parameter and
         the pixel full-width half-maximum of stars in your image.
 
