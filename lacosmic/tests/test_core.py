@@ -7,7 +7,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_array_equal, assert_allclose
 
-from ..lacosmic import lacosmic
+from ..core import lacosmic
 
 try:
     import scipy
