@@ -6,15 +6,11 @@ L.A.Cosmic (PASP 113, 1420, 2001) algorithm.
 
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-from distutils.version import LooseVersion
+
 import numpy as np
-
-import astropy
-if LooseVersion(astropy.__version__) < LooseVersion('1.1'):
-    raise ImportError('lacosmic requires astropy >= 1.1')
-
-from astropy.nddata.utils import block_reduce, block_replicate
 from astropy import log
+from astropy.nddata.utils import block_reduce, block_replicate
+from scipy import ndimage
 
 
 __all__ = ['lacosmic']
@@ -116,7 +112,6 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         have a value of `True`.
     """
 
-    from scipy import ndimage
     block_size = 2.0
     kernel = np.array([[0.0, -1.0, 0.0], [-1.0, 4.0, -1.0], [0.0, -1.0, 0.0]])
 
