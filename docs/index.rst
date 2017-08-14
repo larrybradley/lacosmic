@@ -24,6 +24,8 @@ Requirements
 
 * `Scipy <http://www.scipy.org/>`_ 0.16 or later
 
+* `scikit-image <http://scikit-image.org/>`_ 0.11 or later
+
 
 Installation
 ============
