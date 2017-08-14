@@ -134,8 +134,8 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
 
         if clean_error_image is None:
             if effective_gain is None or readnoise is None:
-                raise AssertionError('effective_gain and readnoise must be '
-                                     'input if error is not input')
+                raise ValueError('effective_gain and readnoise must be '
+                                 'input if error is not input')
             med5_img = ndimage.median_filter(clean_data, size=5,
                                              mode=border_mode).clip(min=1.e-5)
             error_image = (np.sqrt(effective_gain*med5_img + readnoise**2) /
@@ -199,14 +199,15 @@ def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
     when calculating the local median.
     """
 
-    assert size % 2 == 1, 'size must be an odd integer'
-    assert data.shape == mask.shape, \
-        'mask must have the same shape as image'
+    if (size % 2) != 1:
+        raise ValueError('size must be an odd integer')
+    if data.shape != mask.shape:
+        raise ValueError('mask must have the same shape as data')
     ny, nx = data.shape
     mask_coords = np.argwhere(mask)
     if exclude_mask is not None:
-        assert data.shape == exclude_mask.shape, \
-            'exclude_mask must have the same shape as data'
+        if data.shape != exclude_mask.shape:
+            raise ValueError('exclude_mask must have the same shape as data')
         maskall = np.logical_or(mask, exclude_mask)
     else:
         maskall = mask
