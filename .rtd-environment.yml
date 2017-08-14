@@ -1,9 +1,10 @@
 name: lacosmic
 
 dependencies:
-    - astropy
-    - Cython
-    - matplotlib
     - numpy
+    - astropy
+    - scipy
+    - scikit-image
+    - matplotlib
     - docutils
     - Sphinx >=1.5.1,<=1.5.6
