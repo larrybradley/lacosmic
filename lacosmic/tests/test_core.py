@@ -1,7 +1,6 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-from distutils.version import LooseVersion
 
 import pytest
 import numpy as np
@@ -9,17 +8,6 @@ from numpy.testing import assert_array_equal, assert_allclose
 
 from ..core import lacosmic
 
-try:
-    import scipy
-    HAS_SCIPY = True
-except ImportError:
-    HAS_SCIPY = False
-
-import astropy
-if LooseVersion(astropy.__version__) < LooseVersion('1.1'):
-    ASTROPY_LT_1P1 = True
-else:
-    ASTROPY_LT_1P1 = False
 
 IMG = np.random.RandomState(1234567890).randn(5, 5) * 0.5
 x, y = [0, 3, 4, 2, 1], [0, 2, 1, 4, 2]
@@ -29,8 +17,6 @@ MASK_REF = CR.astype(np.bool)
 CR_IMG = IMG + CR
 
 
-@pytest.mark.skipif('not HAS_SCIPY')
-@pytest.mark.skipif('ASTROPY_LT_1P1')
 class TestLACosmic(object):
     def test_lacosmic(self):
         """Test basic lacosmic."""
