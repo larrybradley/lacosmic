@@ -2,9 +2,11 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 from distutils.version import LooseVersion
-from astropy.tests.helper import pytest
+
+import pytest
 import numpy as np
 from numpy.testing import assert_array_equal, assert_allclose
+
 from ..lacosmic import lacosmic
 
 try:
