@@ -30,7 +30,7 @@ env:
         - MAIN_CMD='python setup.py'
         - SETUP_CMD='test'
         - EVENT_TYPE='pull_request push'
-        - CONDA_DEPENDENCIES='scipy matplotlib'
+        - CONDA_DEPENDENCIES='scipy scikit-image'
         - CONDA_CHANNELS='astropy-ci-extras astropy'
         - SETUP_XVFB=True
         - ASTROPY_USE_SYSTEM_PYTEST=1
@@ -58,11 +58,11 @@ matrix:
         # may run for a long time
         - os: linux
           env: PYTHON_VERSION=2.7 SETUP_CMD='build_docs -w'
-               CONDA_DEPENDENCIES='scipy matplotlib jupyter'
+               CONDA_DEPENDENCIES='scipy scikit-image matplotlib'
                SPHINX_VERSION='>1.6'
         - os: linux
           env: SETUP_CMD='build_docs -w'
-               CONDA_DEPENDENCIES='scipy matplotlib jupyter'
+               CONDA_DEPENDENCIES='scipy scikit-image matplotlib'
                EVENT_TYPE='pull_request push cron'
                SPHINX_VERSION='>1.6'
 
@@ -92,11 +92,6 @@ matrix:
           env: NUMPY_VERSION=1.11
         - os: linux
           env: NUMPY_VERSION=1.12
-
-        # Try with optional dependencies disabled
-        - os: linux
-          env: PYTHON_VERSION=2.7
-        - os: linux
 
         # Try numpy pre-release
         - os: linux
