@@ -1,4 +1,4 @@
-Copyright (c) 2014-2017, lacosmic developers
+Copyright (c) 2014-2017, Larry Bradley
 
 All rights reserved.
 
