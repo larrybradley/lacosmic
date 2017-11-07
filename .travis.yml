@@ -71,7 +71,7 @@ matrix:
         - env: PYTHON_VERSION=3.6 SETUP_CMD='egg_info'
 
         # Do a PEP8/pyflakes test with flake8
-        - env: MAIN_CMD="flake8 photutils --count $FLAKE8_OPT" SETUP_CMD=''
+        - env: MAIN_CMD="flake8 lacosmic --count $FLAKE8_OPT" SETUP_CMD=''
 
         - env: SETUP_CMD='test --coverage'
 
@@ -144,5 +144,5 @@ script:
 
 after_success:
     - if [[ $SETUP_CMD == *--coverage* ]]; then
-          coveralls --rcfile='photutils/tests/coveragerc';
+          coveralls --rcfile='lacosmic/tests/coveragerc';
       fi
