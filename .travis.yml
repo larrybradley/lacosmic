@@ -32,7 +32,7 @@ env:
         - MAIN_CMD='python setup.py'
         - SETUP_CMD='test'
         - EVENT_TYPE='pull_request push'
-        - CONDA_DEPENDENCIES='Cython scipy matplotlib'
+        - CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib'
         - CONDA_CHANNELS='astropy-ci-extras astropy'
         - SETUP_XVFB=True
         - ASTROPY_USE_SYSTEM_PYTEST=1
@@ -79,11 +79,11 @@ matrix:
         # may run for a long time
         - stage: Test docs, astropy dev, and without optional dependencies
           env: PYTHON_VERSION=2.7 SETUP_CMD='build_docs -w'
-               CONDA_DEPENDENCIES='Cython scipy matplotlib jupyter'
+               CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib jupyter'
 
         - stage: Test docs, astropy dev, and without optional dependencies
           env: SETUP_CMD='build_docs -w'
-               CONDA_DEPENDENCIES='Cython scipy matplotlib jupyter'
+               CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib jupyter'
                EVENT_TYPE='pull_request push cron'
 
         # Now try Astropy dev and LTS versions with the latest Python.

@@ -8,5 +8,6 @@ dependencies:
     - docutils
     - matplotlib
     - numpy
+    - scikit-image
     - scipy
     - Sphinx >=1.5.1,<=1.5.6
