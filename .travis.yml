@@ -55,7 +55,7 @@ env:
 
 stages:
    - name: Initial tests
-   - name: Test docs, astropy dev, and without optional dependencies
+   - name: Test docs and astropy dev
    - name: Tests with other Python/Numpy versions
    - name: Cron tests
      if: type = cron
@@ -77,11 +77,11 @@ matrix:
 
         # Check for sphinx doc build warnings - we do this first because it
         # may run for a long time
-        - stage: Test docs, astropy dev, and without optional dependencies
+        - stage: Test docs and astropy dev
           env: PYTHON_VERSION=2.7 SETUP_CMD='build_docs -w'
                CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib jupyter'
 
-        - stage: Test docs, astropy dev, and without optional dependencies
+        - stage: Test docs and astropy dev
           env: SETUP_CMD='build_docs -w'
                CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib jupyter'
                EVENT_TYPE='pull_request push cron'
@@ -89,20 +89,13 @@ matrix:
         # Now try Astropy dev and LTS versions with the latest Python.
         # We disable LTS testing until astropy 3.0 is out, as the current
         # stable is also the LTS
-        - stage: Test docs, astropy dev, and without optional dependencies
-          env: ASTROPY_VERSION=development
-               EVENT_TYPE='pull_request push cron'
+        #- stage: Test docs and astropy dev
+        #  env: ASTROPY_VERSION=development
+        #       EVENT_TYPE='pull_request push cron'
 
-        #- stage: Test docs, astropy dev, and without optional dependencies
+        #- stage: Test docs and astropy dev
         #  os: linux
         #  env: PYTHON_VERSION=3.5 ASTROPY_VERSION=lts
-
-        # Try with optional dependencies disabled
-        - stage: Test docs, astropy dev, and without optional dependencies
-          env: PYTHON_VERSION=2.7 CONDA_DEPENDENCIES='Cython'
-
-        - stage: Test docs, astropy dev, and without optional dependencies
-          env: CONDA_DEPENDENCIES='Cython'
 
         # Try older python and numpy versions. Since we can assume
         # that the Numpy developers have taken care of testing Numpy
