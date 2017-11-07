@@ -51,5 +51,5 @@ User Documentation
 .. toctree::
     :maxdepth: 1
 
-    lacosmic/index.rst
+    high-level_API.rst
     changelog.rst
