@@ -7,8 +7,8 @@ L.A.Cosmic (PASP 113, 1420, 2001) algorithm.
 # Affiliated packages may add whatever they like to this file, but
 # should keep this content at the top.
 # ----------------------------------------------------------------------------
-from ._astropy_init import *
+from ._astropy_init import *    # noqa
 # ----------------------------------------------------------------------------
 
-if not _ASTROPY_SETUP_:
-    from .core import *
+if not _ASTROPY_SETUP_:    # noqa
+    from .core import *    # noqa

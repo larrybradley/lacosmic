@@ -1,31 +1,30 @@
 [run]
 source = lacosmic
+
 omit =
-   lacosmic/_astropy_init*
-   lacosmic/conftest*
-   lacosmic/cython_version*
-   lacosmic/setup_package*
-   lacosmic/*/setup_package*
-   lacosmic/*/*/setup_package*
-   lacosmic/tests/*
-   lacosmic/*/tests/*
-   lacosmic/*/*/tests/*
-   lacosmic/version*
+    lacosmic/*__init__*
+    lacosmic/_astropy_init.py
+    lacosmic/conftest*
+    lacosmic/cython_version*
+    lacosmic/*setup*
+    lacosmic/*tests/*
+    lacosmic/version*
+    lacosmic/extern/*
 
 [report]
 exclude_lines =
-   # Have to re-enable the standard pragma
-   pragma: no cover
+    # Have to re-enable the standard pragma
+    pragma: no cover
 
-   # Don't complain about packages we have installed
-   except ImportError
+    # Don't complain about packages we have installed
+    except ImportError
 
-   # Don't complain if tests don't hit assertions
-   raise AssertionError
-   raise NotImplementedError
+    # Don't complain if tests don't hit assertions
+    raise AssertionError
+    raise NotImplementedError
 
-   # Don't complain about script hooks
-   def main\(.*\):
+    # Don't complain about script hooks
+    def main\(.*\):
 
-   # Ignore branches that don't pertain to this version of Python
-   pragma: py{ignore_python_version}
+    # Ignore branches that don't pertain to this version of Python
+    pragma: py{ignore_python_version}

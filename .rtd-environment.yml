@@ -1,10 +1,12 @@
 name: lacosmic
 
-dependencies:
-    - numpy
+channels:
     - astropy
-    - scipy
-    - scikit-image
-    - matplotlib
+
+dependencies:
+    - astropy
     - docutils
+    - matplotlib
+    - numpy
+    - scipy
     - Sphinx >=1.5.1,<=1.5.6
