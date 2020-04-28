@@ -1,17 +1,13 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 """
 Module to remove cosmic rays from an astronomical image using the
-L.A.Cosmic (PASP 113, 1420, 2001) algorithm.
+L.A.Cosmic algorithm (van Dokkum 2001; PASP 113, 1420).
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
-import numpy as np
 from astropy import log
-from astropy.nddata.utils import block_reduce, block_replicate
+from astropy.nddata import block_reduce, block_replicate
+import numpy as np
 from scipy import ndimage
-
 
 __all__ = ['lacosmic']
 
@@ -20,13 +16,14 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
              error=None, mask=None, background=None, effective_gain=None,
              readnoise=None, maxiter=4, border_mode='mirror'):
     """
-    Remove cosmic rays from an astronomical image using the `L.A.Cosmic
-    <http://www.astro.yale.edu/dokkum/lacosmic/>`_ algorithm.  The
-    algorithm is based on Laplacian edge detection and is described in
-    `PASP 113, 1420 (2001)`_.
+    Remove cosmic rays from an astronomical image using the L.A.Cosmic
+    algorithm.
 
-    .. _PASP 113, 1420 (2001):
-        http://adsabs.harvard.edu/abs/2001PASP..113.1420V
+    The `L.A.Cosmic algorithm
+    <http://www.astro.yale.edu/dokkum/lacosmic/>`_ is based on Laplacian
+    edge detection and is described in `van Dokkum (2001; PASP 113,
+    1420)
+    <https://ui.adsabs.harvard.edu/abs/2001PASP..113.1420V/abstract>`_.
 
     Parameters
     ----------
@@ -36,13 +33,15 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
     contrast : float
         Contrast threshold between the Laplacian image and the
         fine-structure image.  If your image is critically sampled, use
-        a value around 2.  If your image is undersampled (e.g. HST
+        a value around 2.  If your image is undersampled (e.g., HST
         data), a value of 4 or 5 (or more) is more appropriate.  If your
         image is oversampled, use a value between 1 and 2.  For details,
-        please see `PASP 113, 1420 (2001)`_, which calls this parameter
-        :math:`f_{\\mbox{lim}}`.  In particular, Figure 4 shows the
-        approximate relationship between the ``contrast`` parameter and
-        the pixel full-width half-maximum of stars in your image.
+        please see `PASP 113, 1420 (2001)
+        <https://ui.adsabs.harvard.edu/abs/2001PASP..113.1420V/abstract>`_,
+        which calls this parameter :math:`f_{\\mbox{lim}}`.  In
+        particular, Figure 4 shows the approximate relationship between
+        the ``contrast`` parameter and the full-width half-maximum (in
+        pixels) of stars in your image.
 
     cr_threshold : float
         The Laplacian signal-to-noise ratio threshold for cosmic-ray
@@ -54,12 +53,12 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         cosmic rays.
 
     error : array_like, optional
-        The pixel-wise Gaussian 1-sigma errors of the input ``data``.
-        If ``error`` is not input, then ``effective_gain`` and
-        ``readnoise`` will be used to construct an approximate model of
-        the ``error``.  If ``error`` is input, it will override the
-        ``effective_gain`` and ``readnoise`` parameters.  ``error`` must
-        have the same shape as ``data``.
+        The 1-sigma errors of the input ``data``.  If ``error`` is not
+        input, then ``effective_gain`` and ``readnoise`` will be used to
+        construct an approximate model of the ``error``.  If ``error``
+        is input, it will override the ``effective_gain`` and
+        ``readnoise`` parameters.  ``error`` must have the same shape as
+        ``data``.
 
     mask : array_like (bool), optional
         A boolean mask, with the same shape as ``data``, where a `True`
@@ -71,7 +70,7 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         The background level previously subtracted from the input
         ``data``.  ``background`` may either be a scalar value or a 2D
         image with the same shape as the input ``data``.  If the input
-        ``data`` has not been background-subtracted, then set
+        ``data`` has not been background subtracted, then set
         ``background=None`` (default).
 
     effective_gain : float, array-like, optional
@@ -91,15 +90,16 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
     maxiter : float, optional
         The maximum number of iterations.  The default is 4.  The
         routine will automatically exit if no additional cosmic rays are
-        identified.  If the routine is still identifying cosmic rays
-        after four iterations, then you are likely digging into sources
-        (e.g. saturated stars) and/or the noise.  In that case, try
-        inputing a ``mask`` or increasing the value of ``cr_threshold``.
+        identified in an interation.  If the routine is still
+        identifying cosmic rays after four iterations, then you are
+        likely digging into sources (e.g., saturated stars) and/or the
+        noise.  In that case, try inputing a ``mask`` or increasing the
+        value of ``cr_threshold``.
 
     border_mode : {'reflect', 'constant', 'nearest', 'mirror', 'wrap'}, optional
         The mode in which the array borders are handled during
-        convolution and median filtering.  For 'constant', the value is
-        0.  The default is 'mirror', which matches the original
+        convolution and median filtering.  For 'constant', the fill
+        value is 0.  The default is 'mirror', which matches the original
         L.A.Cosmic algorithm.
 
     Returns
@@ -240,7 +240,7 @@ def _local_median(data_nanmask, x, y, nx, ny, size=5, expanded=False):
     if len(goodpixels) > 0:
         median_val = np.median(goodpixels)
     else:
-        newsize = size + 2     # keep size odd
+        newsize = size + 2  # keep size odd
         median_val, expanded = _local_median(data_nanmask, x, y, nx, ny,
                                              size=newsize, expanded=True)
     return median_val, expanded
