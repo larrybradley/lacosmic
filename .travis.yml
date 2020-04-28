@@ -1,141 +1,159 @@
-# We set the language to c because python isn't supported on the MacOS X nodes
-# on Travis. However, the language ends up being irrelevant anyway, since we
-# install Python ourselves using conda.
-language: c
+language: python
+
+# We need a full clone to make sure setuptools_scm works properly
+git:
+    depth: false
 
 os:
     - linux
 
-stage: Initial tests
-
-# Setting sudo to false opts in to Travis-CI container-based builds.
-sudo: false
-
-# The apt packages below are needed for sphinx builds. A full list of
-# packages that can be included can be found here:
+# The apt packages below are needed for sphinx builds. A full list of packages
+# that can be included can be found here:
+#
 # https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
+
 addons:
     apt:
         packages:
             - graphviz
-            - texlive-latex-extra
-            - dvipng
 
-env:
-    global:
-        # The following versions are the 'default' for tests, unless
-        # overridden underneath. They are defined here in order to save having
-        # to repeat them for all configurations.
-        - PYTHON_VERSION=3.6
-        - NUMPY_VERSION=stable
-        - ASTROPY_VERSION=stable
-        - MAIN_CMD='python setup.py'
-        - SETUP_CMD='test'
-        - EVENT_TYPE='pull_request push'
-        - CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib'
-        - CONDA_CHANNELS='astropy-ci-extras astropy'
-        - SETUP_XVFB=True
-        - ASTROPY_USE_SYSTEM_PYTEST=1
-
-        # PEP8 errors/warnings:
-        # E101 - mix of tabs and spaces
-        # W191 - use of tabs
-        # W291 - trailing whitespace
-        # W292 - no newline at end of file
-        # W293 - trailing whitespace
-        # W391 - blank line at end of file
-        # E111 - 4 spaces per indentation level
-        # E112 - 4 spaces per indentation level
-        # E113 - 4 spaces per indentation level
-        # E502 - the backslash is redundant between brackets
-        # E722 - do not use bare except
-        # E901 - SyntaxError or IndentationError
-        # E902 - IOError
-        - FLAKE8_OPT="--select=E101,W191,W291,W292,W293,W391,E111,E112,E113,E502,E722,E901,E902"
 
 stages:
+   # Do the style check and a single test job, don't proceed if it fails
    - name: Initial tests
-   - name: Test docs and astropy dev
-   - name: Tests with other Python/Numpy versions
+   # Test docs, astropy dev, and without optional dependencies
+   - name: Comprehensive tests
+   # These will only run when cron is opted in
    - name: Cron tests
      if: type = cron
 
+
+env:
+    global:
+
+        # The following versions are the 'default' for tests, unless
+        # overridden underneath. They are defined here in order to save having
+        # to repeat them for all configurations.
+
+        # The following three variables are for tox. TOXENV is a standard
+        # variable that tox uses to determine the environment to run,
+        # TOXARGS are arguments passed to tox, and TOXPOSARGS are arguments
+        # that tox passes through to the {posargs} indicator in tox.ini.
+        # The latter can be used for example to pass arguments to pytest.
+        - TOXENV='test'
+        - TOXARGS='-v'
+        - TOXPOSARGS=''
+
+        # The following is needed to avoid issues if e.g. Matplotlib tries
+        # to open a GUI window.
+        - SETUP_XVFB=True
+
 matrix:
+
     # Don't wait for allowed failures
     fast_finish: true
 
     include:
-        - env: PYTHON_VERSION=2.7 SETUP_CMD='egg_info'
-        - env: PYTHON_VERSION=3.4 SETUP_CMD='egg_info'
-        - env: PYTHON_VERSION=3.5 SETUP_CMD='egg_info'
-        - env: PYTHON_VERSION=3.6 SETUP_CMD='egg_info'
 
-        # Do a PEP8/pyflakes test with flake8
-        - env: MAIN_CMD="flake8 lacosmic --count $FLAKE8_OPT" SETUP_CMD=''
+        # Try MacOS X, usually enough only to run from cron as hardly there are
+        # issues that are not picked up by a linux worker. We set language to
+        # 'c' since 'python' doesn't work on non-Linux platforms.
+        - os: osx
+          language: c
+          name: Python 3.7 with required dependencies
+          stage: Cron tests
+          env: PYTHON_VERSION=3.7 TOXENV=py37-test
 
-        - env: SETUP_CMD='test --coverage'
+        # Do a regular build on Linux with Python 3.8, with cov
+        # For Linux we use language: python to avoid using conda.
+        - os: linux
+          python: 3.8
+          name: Python 3.8 with required dependencies and measure coverage
+          stage: Initial tests
+          env: TOXENV=py38-test-cov
 
-        # Check for sphinx doc build warnings - we do this first because it
-        # may run for a long time
-        - stage: Test docs and astropy dev
-          env: PYTHON_VERSION=2.7 SETUP_CMD='build_docs -w'
-               CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib jupyter'
+        # Check for sphinx doc build warnings
+        - os: linux
+          python: 3.8
+          name: Documentation build
+          stage: Comprehensive tests
+          env: TOXENV=build_docs
 
-        - stage: Test docs and astropy dev
-          env: SETUP_CMD='build_docs -w'
-               CONDA_DEPENDENCIES='Cython scipy scikit-image matplotlib jupyter'
-               EVENT_TYPE='pull_request push cron'
+        # Now try Astropy dev with the latest Python
+        - os: linux
+          python: 3.8
+          name: Python 3.8 with developer version of astropy
+          stage: Comprehensive tests
+          env: TOXENV=py38-test-devdeps
 
-        # Now try Astropy dev and LTS versions with the latest Python.
-        # We disable LTS testing until astropy 3.0 is out, as the current
-        # stable is also the LTS
-        #- stage: Test docs and astropy dev
-        #  env: ASTROPY_VERSION=development
-        #       EVENT_TYPE='pull_request push cron'
+        # And with an older Python, Astropy LTS, and the oldest supported Numpy
+        - os: linux
+          python: 3.6
+          name: Python 3.6 astropy LTS and Numpy 1.16
+          stage: Comprehensive tests
+          env: TOXENV=py36-test-astropylts-numpy116
 
-        #- stage: Test docs and astropy dev
-        #  os: linux
-        #  env: PYTHON_VERSION=3.5 ASTROPY_VERSION=lts
+        # Add a job that runs from cron only and tests against astropy dev and
+        # numpy dev to give a change for early discovery of issues and feedback
+        # for both developer teams.
+        - os: linux
+          python: 3.8
+          name: Python 3.8 latest developer version of key dependencies
+          stage: Cron tests
+          env: TOXENV=py38-test-devdeps
 
-        # Try older python and numpy versions. Since we can assume
-        # that the Numpy developers have taken care of testing Numpy
-        # with different versions of Python, we can vary Python and
-        # Numpy versions at the same time.
-        - stage: Tests with other Python/Numpy versions
-          env: PYTHON_VERSION=3.4 NUMPY_VERSION=1.9
-               PIP_DEPENDENCIES='pytest>=3.1'
+        # Try on Windows.
+        - os: windows
+          language: c
+          name: Python 3.8 with required dependencies
+          stage: Comprehensive tests
+          env: PYTHON_VERSION=3.8 TOXENV=py38-test
 
-        - stage: Tests with other Python/Numpy versions
-          env: PYTHON_VERSION=3.5 NUMPY_VERSION=1.10
+        # Try other python versions and Numpy versions. Since we can assume that
+        # the Numpy developers have taken care of testing Numpy with different
+        # versions of Python, we can vary Python and Numpy versions at the same
+        # time.
 
-        - stage: Tests with other Python/Numpy versions
-          env: NUMPY_VERSION=1.11
+        - os: linux
+          python: 3.7
+          name: Python 3.7 with astropy 3.2 and Numpy 1.17
+          stage: Comprehensive tests
+          env: TOXENV=py37-test-astropy32-numpy117
 
-        - stage: Tests with other Python/Numpy versions
-          env: NUMPY_VERSION=1.12
-
-        # Try numpy pre-release
-        - stage: Tests with other Python/Numpy versions
-          env: NUMPY_VERSION=prerelease
-               EVENT_TYPE='pull_request push cron'
-
-        # Try MacOS X
-        - stage: Cron tests
-          os: osx
-          env: SETUP_CMD='test' EVENT_TYPE='cron'
+        # Do a code style check
+        - os: linux
+          python: 3.8
+          name: Code style checks
+          stage: Initial tests
+          env: TOXENV=codestyle
 
     allow_failures:
-        - env: NUMPY_VERSION=prerelease
-               EVENT_TYPE='pull_request push cron'
+        # Do a PEP8 test with flake8
+        # (do allow to fail unless your code completely compliant)
+        # - os: linux
+        #   python: 3.8
+        #   name: Code style checks
+        #   stage: Initial tests
+        #   env: TOXENV=codestyle
 
 install:
-    - git clone git://github.com/astropy/ci-helpers.git
-    - source ci-helpers/travis/setup_conda.sh
+
+    # We now use the ci-helpers package to set up our Python environment
+    # on Windows and MacOS X but we don't set up any other dependencies,
+    # instead using tox to do this. See https://github.com/astropy/ci-helpers
+    # for more information about ci-helpers.
+
+    - if [[ $TRAVIS_OS_NAME != linux ]]; then
+        git clone --depth 1 git://github.com/astropy/ci-helpers.git;
+        source ci-helpers/travis/setup_conda.sh;
+      fi
 
 script:
-   - $MAIN_CMD $SETUP_CMD
+    - pip install tox
+    - tox $TOXARGS -- $TOXPOSARGS
 
 after_success:
-    - if [[ $SETUP_CMD == *--coverage* ]]; then
-          coveralls --rcfile='lacosmic/tests/coveragerc';
+    - if [[ $TOXENV == *-cov ]]; then
+        pip install codecov;
+        codecov
       fi
