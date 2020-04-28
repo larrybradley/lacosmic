@@ -155,5 +155,5 @@ script:
 after_success:
     - if [[ $TOXENV == *-cov ]]; then
         pip install codecov;
-        codecov
+        codecov;
       fi
