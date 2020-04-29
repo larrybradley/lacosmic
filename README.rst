@@ -24,7 +24,7 @@ based on Laplacian edge detection and is described in `van Dokkum
     :target: https://travis-ci.org/larrybradley/lacosmic
     :alt: Travis CI Status
 
-.. |Codecov Status| image:: https://codecov.io/gh/larrybradley/lacosmic/branch/master/graph/badge.svg
+.. |Codecov Status| image:: https://img.shields.io/codecov/c/github/larrybradley/lacosmic?logo=codecov
     :target: https://codecov.io/gh/larrybradley/lacosmic
     :alt: Codecov Status
 
