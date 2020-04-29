@@ -11,12 +11,10 @@ os:
 # that can be included can be found here:
 #
 # https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
-
 addons:
     apt:
         packages:
             - graphviz
-
 
 stages:
    # Do the style check and a single test job, don't proceed if it fails
@@ -27,10 +25,8 @@ stages:
    - name: Cron tests
      if: type = cron
 
-
 env:
     global:
-
         # The following versions are the 'default' for tests, unless
         # overridden underneath. They are defined here in order to save having
         # to repeat them for all configurations.
@@ -49,12 +45,10 @@ env:
         - SETUP_XVFB=True
 
 matrix:
-
     # Don't wait for allowed failures
     fast_finish: true
 
     include:
-
         # Try MacOS X, usually enough only to run from cron as hardly there are
         # issues that are not picked up by a linux worker. We set language to
         # 'c' since 'python' doesn't work on non-Linux platforms.
@@ -136,8 +130,16 @@ matrix:
         #   stage: Initial tests
         #   env: TOXENV=codestyle
 
-install:
+before_install:
+    - if [[ $TOXENV == *-cov ]]; then
+        export TOXPOSARGS=$TOXPOSARGS" --cov-report=xml:"$TRAVIS_BUILD_DIR"/coverage.xml";
+      fi
 
+    - echo "TOXENV="$TOXENV
+    - echo "TOXARGS="$TOXARGS
+    - echo "TOXPOSARGS="$TOXPOSARGS
+
+install:
     # We now use the ci-helpers package to set up our Python environment
     # on Windows and MacOS X but we don't set up any other dependencies,
     # instead using tox to do this. See https://github.com/astropy/ci-helpers
