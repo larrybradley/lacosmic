@@ -13,13 +13,12 @@ except ImportError:
 
 
 def pytest_configure(config):
-
     if ASTROPY_HEADER:
-
         config.option.astropy_header = True
 
-        # Customize the following lines to add/remove entries from the list of
-        # packages for which version numbers are displayed when running the tests.
+        # Customize the following lines to add/remove entries from the
+        # list of packages for which version numbers are displayed when
+        # running the tests.
         PYTEST_HEADER_MODULES['Astropy'] = 'astropy'
         PYTEST_HEADER_MODULES['scikit-image'] = 'skimage'
         PYTEST_HEADER_MODULES.pop('Pandas', None)
