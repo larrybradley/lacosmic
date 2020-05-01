@@ -199,14 +199,14 @@ def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
     when calculating the local median.
     """
 
-    if (size % 2) != 1:
+    if (size % 2) != 1:  # pragma: no cover
         raise ValueError('size must be an odd integer')
-    if data.shape != mask.shape:
+    if data.shape != mask.shape:  # pragma: no cover
         raise ValueError('mask must have the same shape as data')
     ny, nx = data.shape
     mask_coords = np.argwhere(mask)
     if exclude_mask is not None:
-        if data.shape != exclude_mask.shape:
+        if data.shape != exclude_mask.shape:  # pragma: no cover
             raise ValueError('exclude_mask must have the same shape as data')
         maskall = np.logical_or(mask, exclude_mask)
     else:

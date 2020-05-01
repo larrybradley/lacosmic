@@ -86,3 +86,10 @@ class TestLACosmic(object):
         with pytest.raises(ValueError):
             lacosmic(CR_IMG, 3, 2, 2, effective_gain=1, readnoise=0,
                      error=error)
+
+    def test_error_inputs(self):
+        with pytest.raises(ValueError):
+            lacosmic(CR_IMG, 3, 2, 2, effective_gain=1, error=None)
+
+        with pytest.raises(ValueError):
+            lacosmic(CR_IMG, 3, 2, 2, readnoise=0, error=None)
