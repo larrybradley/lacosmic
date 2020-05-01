@@ -20,7 +20,6 @@ def pytest_configure(config):
         # list of packages for which version numbers are displayed when
         # running the tests.
         PYTEST_HEADER_MODULES['Astropy'] = 'astropy'
-        PYTEST_HEADER_MODULES['scikit-image'] = 'skimage'
         PYTEST_HEADER_MODULES.pop('Pandas', None)
         PYTEST_HEADER_MODULES.pop('h5py', None)
 
