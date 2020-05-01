@@ -5,7 +5,7 @@ L.A.Cosmic algorithm (van Dokkum 2001; PASP 113, 1420).
 """
 
 from astropy import log
-from astropy.nddata import block_reduce, block_replicate
+from .extern.blocks import block_reduce, block_replicate
 import numpy as np
 from scipy import ndimage
 
