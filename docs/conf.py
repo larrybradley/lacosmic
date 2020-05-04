@@ -188,3 +188,11 @@ nitpick_ignore = []
 #     dtype, target = line.split(None, 1)
 #     target = target.strip()
 #     nitpick_ignore.append((dtype, six.u(target)))
+
+
+# -- Options for linkcheck output -------------------------------------------
+linkcheck_retry = 5
+linkcheck_ignore = ['http://data.astropy.org',
+                    r'https://github\.com/larrybradley/lacosmic/(?:issues|pull)/\d+']
+linkcheck_timeout = 180
+linkcheck_anchors = False
