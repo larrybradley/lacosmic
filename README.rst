@@ -2,7 +2,7 @@
 lacosmic
 ========
 
-|PyPI Version| |Travis Status| |Codecov Status| |Stable RTD Status| |Astropy|
+|PyPI Version| |CI Status| |Codecov Status| |Stable RTD Status| |Astropy|
 
 lacosmic is a Python package to remove cosmic rays from an
 astronomical image using the `L.A.Cosmic algorithm
@@ -20,9 +20,9 @@ based on Laplacian edge detection and is described in `van Dokkum
     :target: https://www.astropy.org/
     :alt: Powered by Astropy
 
-.. |Travis Status| image:: https://img.shields.io/travis/larrybradley/lacosmic/master?logo=travis%20ci&logoColor=white&label=Travis%20CI
-    :target: https://travis-ci.org/larrybradley/lacosmic
-    :alt: Travis CI Status
+.. |CI Status| image:: https://github.com/larrybradley/lacosmic/workflows/CI%20Tests/badge.svg#
+    :target: https://github.com/larrybradley/lacosmic/actions
+    :alt: CI Status
 
 .. |Codecov Status| image:: https://img.shields.io/codecov/c/github/larrybradley/lacosmic?logo=codecov
     :target: https://codecov.io/gh/larrybradley/lacosmic
