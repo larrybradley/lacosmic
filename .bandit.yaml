@@ -1,0 +1,3 @@
+exclude_dirs:
+  - lacosmic/*test*
+  - lacosmic/**/*test*
