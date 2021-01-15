@@ -5,8 +5,6 @@ This module includes helper functions for array operations.
 
 import numpy as np
 
-from astropy.nddata import support_nddata
-
 __all__ = ['reshape_as_blocks', 'block_reduce', 'block_replicate']
 
 
@@ -93,7 +91,6 @@ def reshape_as_blocks(data, block_size):
     return data.reshape(new_shape).transpose(nblocks_idx + block_idx)
 
 
-@support_nddata
 def block_reduce(data, block_size, func=np.sum):
     """
     Downsample a data array by applying a function to local blocks.
@@ -156,7 +153,6 @@ def block_reduce(data, block_size, func=np.sum):
     return func(reshaped, axis=axis)
 
 
-@support_nddata
 def block_replicate(data, block_size, conserve_sum=True):
     """
     Upsample a data array by block replication.
