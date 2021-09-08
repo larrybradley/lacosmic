@@ -88,13 +88,13 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         ``error`` is not input.
 
     maxiter : float, optional
-        The maximum number of iterations.  The default is 4.  The
-        routine will automatically exit if no additional cosmic rays are
-        identified in an interation.  If the routine is still
-        identifying cosmic rays after four iterations, then you are
-        likely digging into sources (e.g., saturated stars) and/or the
-        noise.  In that case, try inputing a ``mask`` or increasing the
-        value of ``cr_threshold``.
+        The maximum number of iterations. The default is 4. The routine
+        will automatically exit if no additional cosmic rays are
+        identified in an iteration. If the routine is still identifying
+        cosmic rays after four iterations, then you are likely digging
+        into sources (e.g., saturated stars) and/or the noise. In
+        that case, try inputing a ``mask`` or increasing the value of
+        ``cr_threshold``.
 
     border_mode : {'reflect', 'constant', 'nearest', 'mirror', 'wrap'}, optional
         The mode in which the array borders are handled during
