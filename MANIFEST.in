@@ -1,12 +1,11 @@
-include README.rst
 include CHANGES.rst
-include setup.cfg
 include LICENSE.rst
+include README.rst
 include pyproject.toml
+include setup.cfg
 
-recursive-include lacosmic *.pyx *.c *.pxd
+recursive-include lacosmic *.pyx *.pxd *.c
 recursive-include docs *
-recursive-include scripts *
 
 prune build
 prune docs/_build

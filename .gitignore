@@ -12,26 +12,15 @@ __pycache__
 # Other generated files
 */version.py
 */cython_version.py
+MANIFEST
 htmlcov
 .coverage
-MANIFEST
 .ipynb_checkpoints
+.pytest_cache
 
 # Sphinx
-docs/api
 docs/_build
-
-# Eclipse editor project files
-.project
-.pydevproject
-.settings
-
-# Pycharm editor project files
-.idea
-
-# Floobits project files
-.floo
-.flooignore
+docs/api
 
 # Packages/installer info
 *.egg
@@ -47,16 +36,24 @@ sdist
 develop-eggs
 .installed.cfg
 distribute-*.tar.gz
+pip-wheel-metadata
 
 # Other
 .cache
 .tox
 .*.sw[op]
 *~
+
+# Eclipse editor project files
 .project
 .pydevproject
 .settings
-pip-wheel-metadata/
+
+# PyCharm editor project files
+.idea
+
+# Visual Studio Code project files
+.vscode
 
 # Mac OSX
 .DS_Store
