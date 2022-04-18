@@ -19,9 +19,9 @@ Requirements
 
 * `Numpy <https://numpy.org/>`_ 1.18 or later
 
-* `Astropy`_ 3.2 or later
+* `Scipy <https://www.scipy.org/>`_ 1.6.0 or later
 
-* `Scipy <https://www.scipy.org/>`_ 1.1 or later
+* `Astropy`_ 4.1 or later
 
 
 Installation
