@@ -9,63 +9,61 @@ import pytest
 
 from ..core import lacosmic
 
-
-IMG = np.random.RandomState(1234567890).randn(5, 5) * 0.5
-x, y = [0, 3, 4, 2, 1], [0, 2, 1, 4, 2]
+size = 25
+npts = 20
+rng = np.random.default_rng(12345)
+IMG = rng.standard_normal((size, size))
+x = rng.integers(0, size - 1, npts)
+y = rng.integers(0, size - 1, npts)
+ERROR = np.ones(IMG.shape) * 0.1
 CR = np.zeros(IMG.shape)
 CR[y, x] = 10.
-MASK_REF = CR.astype(np.bool)
 CR_IMG = IMG + CR
+MASK_REF = CR.astype(bool)
 
 
-class TestLACosmic(object):
+class TestLACosmic:
+    """
+    Tests for lacosmic.
+    """
+
     def test_lacosmic(self):
         """Test basic lacosmic."""
-        crclean_img, crmask_img = lacosmic(CR_IMG, 3, 2, 2, effective_gain=1,
-                                           readnoise=0)
-        assert_allclose(crclean_img, IMG, atol=0.76)
+        crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR)
+        assert_allclose(crclean_img, IMG, atol=2.)
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_background_scalar(self):
         """Test lacosmic with a background scalar."""
-        crclean_img, crmask_img = lacosmic(CR_IMG, 3, 1, 1, effective_gain=1,
-                                           readnoise=0, background=10)
-        assert_allclose(crclean_img, IMG, atol=0.76)
+        crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR,
+                                           background=10)
+        assert_allclose(crclean_img, IMG, atol=2.)
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_background_maxiter(self):
         """Test lacosmic with a background scalar."""
-        crclean_img, crmask_img = lacosmic(CR_IMG, 3, 1, 1, effective_gain=1,
-                                           readnoise=0, background=10,
-                                           maxiter=1)
-        assert_allclose(crclean_img, IMG, atol=0.76)
+        crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR,
+                                           background=10, maxiter=1)
+        assert_allclose(crclean_img, IMG, atol=2.)
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_background_image(self):
         """Test lacosmic with a 2D background image."""
         bkgrd_img = np.ones(IMG.shape) * 10.
-        crclean_img, crmask_img = lacosmic(CR_IMG, 3, 1, 1, effective_gain=1,
-                                           readnoise=0, background=bkgrd_img)
-        assert_allclose(crclean_img, IMG, atol=0.76)
+        crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR,
+                                           background=bkgrd_img)
+        assert_allclose(crclean_img, IMG, atol=2.)
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_mask_image(self):
         """Test lacosmic with an input mask image."""
         mask = MASK_REF.copy()
-        mask[2, 1] = False
+        mask[0:10, 0:10] = False
         mask_ref2 = np.logical_and(MASK_REF, ~mask)
-        crclean_img, crmask_img = lacosmic(CR_IMG, 3, 2, 2, effective_gain=1,
-                                           readnoise=0, mask=mask)
-        assert_allclose(crclean_img * mask_ref2, IMG * mask_ref2, atol=0.76)
+        crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR,
+                                           mask=mask)
+        assert_allclose(crclean_img * mask_ref2, IMG * mask_ref2, atol=2.)
         assert_array_equal(crmask_img, mask_ref2)
-
-    def test_error_image(self):
-        """Test lacosmic with an input error image."""
-        error = np.sqrt(IMG.clip(min=0.001))
-        crclean_img, crmask_img = lacosmic(CR_IMG, 3, 2, 2, effective_gain=1,
-                                           readnoise=0, error=error)
-        assert_allclose(crclean_img, IMG, atol=0.76)
-        assert_array_equal(crmask_img, MASK_REF)
 
     def test_large_cosmics(self):
         """Test lacosmic cleaning with large cosmic rays."""
@@ -73,8 +71,8 @@ class TestLACosmic(object):
         test_img[1:6, 1:6] = 100.
         mask_ref2 = np.zeros((7, 7), dtype=np.bool)
         mask_ref2[1:6, 1:6] = True
-        crclean_img, crmask_img = lacosmic(test_img, 3, 2, 2, effective_gain=1,
-                                           readnoise=0)
+        _, crmask_img = lacosmic(test_img, 3, 2, 2, effective_gain=1,
+                                 readnoise=0)
         assert_array_equal(crmask_img, mask_ref2)
 
     def test_error_image_size(self):
