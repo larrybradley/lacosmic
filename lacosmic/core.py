@@ -111,7 +111,6 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         A mask image of the identified cosmic rays.  Cosmic-ray pixels
         have a value of `True`.
     """
-
     block_size = 2.0
     kernel = np.array([[0.0, -1.0, 0.0], [-1.0, 4.0, -1.0], [0.0, -1.0, 0.0]])
 
@@ -138,8 +137,8 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
                                  'input if error is not input')
             med5_img = ndimage.median_filter(clean_data, size=5,
                                              mode=border_mode).clip(min=1.e-5)
-            error_image = (np.sqrt(effective_gain*med5_img + readnoise**2) /
-                           effective_gain)
+            error_image = (np.sqrt(effective_gain * med5_img + readnoise ** 2)
+                           / effective_gain)
         else:
             error_image = clean_error_image
 
@@ -174,8 +173,8 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
 
         final_crmask = np.logical_or(final_crmask, cr_mask)
         ncosmics_tot += ncosmics
-        log.info('Iteration {0}: Found {1} cosmic-ray pixels, '
-                 'Total: {2}'.format(iteration + 1, ncosmics, ncosmics_tot))
+        log.info(f'Iteration {iteration + 1}: Found {ncosmics} cosmic-ray '
+                 f'pixels, Total: {ncosmics_tot}')
         if ncosmics == 0:
             if background is not None:
                 clean_data -= background
@@ -198,7 +197,6 @@ def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
     Pixels in ``exclude_mask`` are not cleaned, but they are excluded
     when calculating the local median.
     """
-
     if (size % 2) != 1:  # pragma: no cover
         raise ValueError('size must be an odd integer')
     if data.shape != mask.shape:  # pragma: no cover
@@ -224,14 +222,15 @@ def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
         if expanded:
             nexpanded += 1
     if nexpanded > 0:
-        log.info('    Found {0} {1}x{1} masked regions while '
-                 'cleaning.'.format(nexpanded, size))
+        log.info(f'    Found {nexpanded} {size}x{size} masked regions while '
+                 'cleaning.')
     return data
 
 
 def _local_median(data_nanmask, x, y, nx, ny, size=5, expanded=False):
-    """Compute the local median in a 2D window, excluding NaN."""
-
+    """
+    Compute the local median in a 2D window, excluding NaN.
+    """
     hy, hx = size // 2, size // 2
     x0, x1 = np.array([x - hx, x + hx + 1]).clip(0, nx)
     y0, y1 = np.array([y - hy, y + hy + 1]).clip(0, ny)
