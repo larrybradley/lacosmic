@@ -69,7 +69,7 @@ class TestLACosmic:
         """Test lacosmic cleaning with large cosmic rays."""
         test_img = np.ones((7, 7))
         test_img[1:6, 1:6] = 100.
-        mask_ref2 = np.zeros((7, 7), dtype=np.bool)
+        mask_ref2 = np.zeros((7, 7), dtype=bool)
         mask_ref2[1:6, 1:6] = True
         _, crmask_img = lacosmic(test_img, 3, 2, 2, effective_gain=1,
                                  readnoise=0)
