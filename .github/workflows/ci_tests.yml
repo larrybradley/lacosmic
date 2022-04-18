@@ -8,61 +8,57 @@ on:
     - cron: '0 6 * * 1'
 
 env:
-  SETUP_XVFB: True  # avoid issues if mpl tries to open a GUI window
   TOXARGS: '-v'
 
 jobs:
   ci-tests:
     name: ${{ matrix.os }}, ${{ matrix.tox_env }}
     runs-on: ${{ matrix.os }}
-    if: "!(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[ci skip]'))"
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
-            python: '3.6'
-            tox_env: 'py36-test-alldeps'
-          - os: ubuntu-latest
-            python: '3.7'
-            tox_env: 'py37-test-alldeps'
-          - os: ubuntu-latest
             python: '3.8'
-            tox_env: 'py38-test-alldeps-cov'
-            use_remote_data: true
+            tox_env: 'py38-test-alldeps'
+          - os: ubuntu-latest
+            python: '3.9'
+            tox_env: 'py39-test-alldeps'
+          - os: ubuntu-latest
+            python: '3.10'
+            tox_env: 'py310-test-alldeps'
           - os: macos-latest
-            python: '3.8'
-            tox_env: 'py38-test-alldeps'
+            python: '3.10'
+            tox_env: 'py310-test-alldeps'
           - os: windows-latest
-            python: '3.8'
-            tox_env: 'py38-test-alldeps'
+            python: '3.10'
+            tox_env: 'py310-test-alldeps'
           - os: ubuntu-latest
-            python: '3.8'
-            tox_env: 'py38-test'
+            python: '3.10'
+            tox_env: 'py310-test'
           - os: ubuntu-latest
-            python: '3.8'
+            python: '3.10'
             tox_env: 'codestyle'
           - os: ubuntu-latest
-            python: '3.8'
+            python: '3.10'
             tox_env: 'build_docs'
           - os: ubuntu-latest
-            python: '3.8'
+            python: '3.10'
             tox_env: 'linkcheck'
           - os: ubuntu-latest
-            python: '3.8'
+            python: '3.10'
             tox_env: 'bandit'
           - os: ubuntu-latest
-            python: '3.6'
-            tox_env: 'py36-test-alldeps-astropylts-numpy117'
-          - os: ubuntu-latest
-            python: '3.7'
-            tox_env: 'py37-test-alldeps-astropylts-numpy118'
-          - os: ubuntu-latest
             python: '3.8'
-            tox_env: 'py38-test-alldeps-devdeps'
+            tox_env: 'py38-test-alldeps-astropylts-numpy118'
+          - os: ubuntu-latest
+            python: '3.10'
+            tox_env: 'py310-test-alldeps-devdeps'
 
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Set up Python ${{ matrix.python }}
       uses: actions/setup-python@v2
       with:
@@ -81,13 +77,9 @@ jobs:
         python -c "import setuptools; print(f'setuptools {setuptools.__version__}')"
         python -c "import tox; print(f'tox {tox.__version__}')"
     - name: Run tests
-      if: "! matrix.use_remote_data"
-      run: tox -e ${{ matrix.tox_env }}
-    - name: Run tests with remote data
-      if: "matrix.use_remote_data"
-      run: tox -e ${{ matrix.tox_env }} -- --remote-data=any
+      run: tox -e ${{ matrix.tox_env }} -- ${{ matrix.toxposargs }}
     - name: Upload coverage to codecov
-      if: "endsWith(matrix.tox_env, '-cov')"
+      if: "contains(matrix.tox_env, '-cov')"
       uses: codecov/codecov-action@v2
       with:
         file: ./coverage.xml

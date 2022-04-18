@@ -2,7 +2,7 @@
 lacosmic
 ========
 
-|PyPI Version| |CI Status| |Codecov Status| |Stable RTD Status| |Astropy|
+|PyPI Version| |CI Status| |Codecov Status| |Stable RTD Status| |Zenodo| |Astropy|
 
 lacosmic is a Python package to remove cosmic rays from an
 astronomical image using the `L.A.Cosmic algorithm
@@ -31,3 +31,7 @@ based on Laplacian edge detection and is described in `van Dokkum
 .. |Stable RTD Status| image:: https://img.shields.io/readthedocs/lacosmic/latest.svg?logo=read%20the%20docs&logoColor=white&label=Docs&version=stable
     :target: https://lacosmic.readthedocs.io/en/stable/
     :alt: Stable Documentation Status
+
+.. |Zenodo| image:: https://zenodo.org/badge/28157875.svg
+    :target: https://zenodo.org/badge/latestdoi/28157875
+    :alt: Zenodo Latest DOI

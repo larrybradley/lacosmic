@@ -15,13 +15,17 @@ Requirements
 
 ``lacosmic`` has the following requirements:
 
-* `Python <https://www.python.org/>`_ 3.6 or later
+* `Python <https://www.python.org/>`_ 3.8 or later
 
-* `Numpy <https://numpy.org/>`_ 1.16 or later
+* `Numpy <https://numpy.org/>`_ 1.18 or later
 
-* `Astropy`_ 3.2 or later
+* `Scipy <https://www.scipy.org/>`_ 1.6.0 or later
 
-* `Scipy <https://www.scipy.org/>`_ 1.1 or later
+* `Astropy`_ 4.1 or later
+
+``lacosmic`` depends on `pytest-astropy
+<https://github.com/astropy/pytest-astropy>`_ (0.4 or later) to run the
+test suite.
 
 
 Installation
