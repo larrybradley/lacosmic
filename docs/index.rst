@@ -19,7 +19,7 @@ Requirements
 
 * `Numpy <https://numpy.org/>`_ 1.18 or later
 
-* `Scipy <https://www.scipy.org/>`_ 1.6.0 or later
+* `Scipy <https://scipy.org/>`_ 1.6.0 or later
 
 * `Astropy`_ 4.1 or later
 
