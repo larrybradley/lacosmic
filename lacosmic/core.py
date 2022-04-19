@@ -15,7 +15,7 @@ __all__ = ['lacosmic']
 def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
              error=None, mask=None, background=None, effective_gain=None,
              readnoise=None, maxiter=4, border_mode='mirror'):
-    """
+    r"""
     Remove cosmic rays from an astronomical image using the L.A.Cosmic
     algorithm.
 
@@ -38,7 +38,7 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         image is oversampled, use a value between 1 and 2.  For details,
         please see `PASP 113, 1420 (2001)
         <https://ui.adsabs.harvard.edu/abs/2001PASP..113.1420V/abstract>`_,
-        which calls this parameter :math:`f_{\\mbox{lim}}`.  In
+        which calls this parameter :math:`f_{\mbox{lim}}`.  In
         particular, Figure 4 shows the approximate relationship between
         the ``contrast`` parameter and the full-width half-maximum (in
         pixels) of stars in your image.
