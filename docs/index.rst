@@ -58,3 +58,12 @@ Changelog
     :maxdepth: 1
 
     changelog.rst
+
+
+Developer Documentation
+=======================
+
+.. toctree::
+    :maxdepth: 1
+
+    dev/releasing.rst
