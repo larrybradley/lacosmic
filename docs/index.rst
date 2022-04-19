@@ -23,7 +23,7 @@ Requirements
 
 * `Astropy`_ 4.1 or later
 
-``lacosmic`` depends on `pytest-astropy
+``lacosmic`` also depends on `pytest-astropy
 <https://github.com/astropy/pytest-astropy>`_ (0.4 or later) to run the
 test suite.
 
