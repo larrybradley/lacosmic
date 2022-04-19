@@ -1,4 +1,4 @@
-Copyright (c) 2014, Larry Bradley
+Copyright (c) 2014-2022, Larry Bradley
 
 All rights reserved.
 
