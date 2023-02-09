@@ -20,7 +20,7 @@ based on Laplacian edge detection and is described in `van Dokkum
     :target: https://www.astropy.org/
     :alt: Powered by Astropy
 
-.. |CI Status| image:: https://img.shields.io/github/workflow/status/larrybradley/lacosmic/CI%20Tests?label=CI%20Tests&logo=github
+.. |CI Status| image:: https://github.com/larrybradley/lacosmic/workflows/CI%20Tests/badge.svg#
     :target: https://github.com/larrybradley/lacosmic/actions
     :alt: CI Status
 
