@@ -15,17 +15,16 @@ Requirements
 
 ``lacosmic`` has the following requirements:
 
-* `Python <https://www.python.org/>`_ 3.8 or later
+* `Python <https://www.python.org/>`_ 3.9 or later
 
-* `Numpy <https://numpy.org/>`_ 1.18 or later
+* `NumPy <https://numpy.org/>`_ 1.22 or later
 
-* `Scipy <https://scipy.org/>`_ 1.6.0 or later
+* `Scipy <https://scipy.org/>`_ 1.7.2 or later
 
-* `Astropy`_ 4.1 or later
+* `Astropy`_ 5.0 or later
 
-``lacosmic`` also depends on `pytest-astropy
-<https://github.com/astropy/pytest-astropy>`_ (0.4 or later) to run the
-test suite.
+`pytest-astropy <https://github.com/astropy/pytest-astropy>`_ (0.10 or
+later) is required to run the test suite.
 
 
 Installation
@@ -35,11 +34,6 @@ The latest released (stable) version of lacosmic can be installed with
 `pip`_::
 
     pip install lacosmic
-
-If you want to make sure that none of your existing dependencies get
-upgraded, instead you can do::
-
-    pip install lacosmic --no-deps
 
 .. _pip: https://pip.pypa.io/en/latest/
 

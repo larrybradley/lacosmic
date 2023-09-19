@@ -1,7 +1,19 @@
 1.1.0 (unreleased)
 ------------------
 
-- No changes yet
+General
+^^^^^^^
+
+- The minimum required Python version is 3.9. [#19]
+
+- The minimum required Numpy version is 1.22. [#19]
+
+- The minimum required Scipy version is 1.7.2. [#19]
+
+- The minimum required Astropy version is 5.0. [#19]
+
+- The project metadata is now stored in ``pyproject.toml`` (PEP 621).
+  [#19]
 
 
 1.0.0 (2022-04-19)

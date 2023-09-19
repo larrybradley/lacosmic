@@ -7,7 +7,7 @@ L.A.Cosmic algorithm (van Dokkum 2001; PASP 113, 1420).
 # Packages may add whatever they like to this file, but
 # should keep this content at the top.
 # ----------------------------------------------------------------------------
-from ._astropy_init import *   # noqa
+from ._astropy_init import *   # noqa: F401, F403
 # ----------------------------------------------------------------------------
 
-from .core import *  # noqa
+from .core import *  # noqa: F401, F403

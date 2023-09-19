@@ -4,9 +4,9 @@ Module to remove cosmic rays from an astronomical image using the
 L.A.Cosmic algorithm (van Dokkum 2001; PASP 113, 1420).
 """
 
+import numpy as np
 from astropy import log
 from astropy.nddata import block_reduce, block_replicate
-import numpy as np
 from scipy import ndimage
 
 __all__ = ['lacosmic']
