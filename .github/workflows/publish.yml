@@ -4,12 +4,6 @@ on:
   schedule:
     # run every Monday at 5am UTC
     - cron: '0 5 * * 1'
-  pull_request:
-    # We also want this workflow triggered if the 'Build all wheels'
-    # label is added or present when PR is updated
-    types:
-      - synchronize
-      - labeled
   push:
     branches:
       - '*'
@@ -18,6 +12,12 @@ on:
       - '!*dev*'
       - '!*pre*'
       - '!*post*'
+  pull_request:
+    # We also want this workflow triggered if the 'Build all wheels'
+    # label is added or present when PR is updated
+    #types:
+    #  - synchronize
+    #  - labeled
   workflow_dispatch:
 
 permissions:
@@ -25,6 +25,8 @@ permissions:
 
 jobs:
   build_and_publish:
+    if: (github.repository == 'larrybradley/lacosmic' && (github.event_name == 'push' ||  github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'Build all wheels')))
+
     # This job builds the wheels and publishes them to PyPI for all
     # tags, except those ending in ".dev". For PRs with the "Build all
     # wheels" label, wheels are built, but are not uploaded to PyPI.
@@ -34,7 +36,6 @@ jobs:
 
     uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish_pure_python.yml@v1
 
-    if: (github.repository == 'larrybradley/lacosmic' && (github.event_name == 'push' ||  github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'Build all wheels')))
     with:
       # We upload to PyPI for all tag pushes, except tags ending in .dev
       upload_to_pypi: ${{ startsWith(github.ref, 'refs/tags/') && !endsWith(github.ref, '.dev') && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
