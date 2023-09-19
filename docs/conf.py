@@ -41,10 +41,6 @@ highlight_language = 'python3'
 # If your documentation needs a minimal Sphinx version, state it here.
 # needs_sphinx = '3.0'
 
-# To perform a Sphinx version check that needs to be more specific than
-# major.minor, call `check_sphinx_version("x.y.z")` here.
-# check_sphinx_version("1.2.1")
-
 # Extend astropy intersphinx_mapping with packages we use here
 # intersphinx_mapping['skimage'] = ('https://scikit-image.org/docs/stable/', None) noqa: F405
 
@@ -83,7 +79,6 @@ version = package.__version__.split('-', 1)[0]
 release = package.__version__
 
 # -- Options for HTML output --------------------------------------------------
-# A NOTE ON HTML THEMES
 # The global astropy configuration uses a custom theme,
 # 'bootstrap-astropy', which is installed along with astropy. A
 # different theme can be used or the options for this theme can be
@@ -177,4 +172,3 @@ linkcheck_retry = 5
 linkcheck_ignore = ['http://data.astropy.org',
                     r'https://github\.com/larrybradley/lacosmic/(?:issues|pull)/\d+']
 linkcheck_timeout = 180
-linkcheck_anchors = False
