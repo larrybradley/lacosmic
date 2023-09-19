@@ -4,8 +4,8 @@ Tests for the core module.
 """
 
 import numpy as np
-from numpy.testing import assert_array_equal, assert_allclose
 import pytest
+from numpy.testing import assert_allclose, assert_array_equal
 
 from ..core import lacosmic
 
