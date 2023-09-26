@@ -91,6 +91,8 @@ filterwarnings = [
     'error',  # turn warnings into exceptions
     'ignore:numpy.ufunc size changed:RuntimeWarning',
     'ignore:numpy.ndarray size changed:RuntimeWarning',
+    # python 3.12 deprecation in matplotlib 3.9dev
+    'ignore:datetime.datetime.utcfromtimestamp\(\) is deprecated:DeprecationWarning',
 ]
 
 [tool.coverage.run]
