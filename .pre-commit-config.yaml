@@ -64,10 +64,6 @@ repos:
       - id: isort
         name: isort (python)
         additional_dependencies: [toml]
-      - id: isort
-        name: isort (cython)
-        types: [cython]
-        additional_dependencies: [toml]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 6.1.0
