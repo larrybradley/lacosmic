@@ -23,9 +23,6 @@ Requirements
 
 * `Astropy`_ 5.0 or later
 
-`pytest-astropy <https://github.com/astropy/pytest-astropy>`_ (0.10 or
-later) is required to run the test suite.
-
 
 Installation
 ============
