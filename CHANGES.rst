@@ -1,6 +1,12 @@
 1.2.0 (unreleased)
 ------------------
 
+General
+^^^^^^^
+
+- The ``lacosmic.test`` function has been removed. Instead use the
+  ``pytest --pyarg lacosmic`` command. [#25]
+
 
 1.1.0 (2023-11-16)
 ------------------
