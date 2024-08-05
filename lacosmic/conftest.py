@@ -26,7 +26,7 @@ def pytest_configure(config):
         # list of packages for which version numbers are displayed when
         # running the tests.
         PYTEST_HEADER_MODULES.clear()
-        deps = ['NumPy', 'SciPy', 'Matplotlib']
+        deps = ['NumPy', 'SciPy', 'Matplotlib', 'Astropy']
         for dep in deps:
             PYTEST_HEADER_MODULES[dep] = dep.lower()
 
