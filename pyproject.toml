@@ -24,11 +24,11 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Astronomy',
 ]
 dynamic = ['version']
-requires-python = '>=3.9'
+requires-python = '>=3.10'
 dependencies = [
-    'numpy>=1.22',
-    'astropy>=5.0',
-    'scipy>=1.7.2',
+    'numpy>=1.24',
+    'astropy>=5.1',
+    'scipy>=1.10',
 ]
 
 [project.urls]
@@ -37,7 +37,7 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 
 [project.optional-dependencies]
 all = [
-    'matplotlib>=3.5',
+    'matplotlib>=3.6',
 ]
 test = [
     'pytest-astropy>=0.11',
@@ -53,6 +53,7 @@ docs = [
 requires = [
     'setuptools>=61.2',
     'setuptools_scm>=6.2',
+    'numpy>=2.0.0',
 ]
 build-backend = 'setuptools.build_meta'
 

@@ -15,13 +15,13 @@ Requirements
 
 ``lacosmic`` has the following requirements:
 
-* `Python <https://www.python.org/>`_ 3.9 or later
+* `Python <https://www.python.org/>`_ 3.10 or later
 
-* `NumPy <https://numpy.org/>`_ 1.22 or later
+* `NumPy <https://numpy.org/>`_ 1.24 or later
 
-* `Scipy <https://scipy.org/>`_ 1.7.2 or later
+* `Scipy <https://scipy.org/>`_ 1.10 or later
 
-* `Astropy`_ 5.0 or later
+* `Astropy`_ 5.1 or later
 
 
 Installation
