@@ -16,6 +16,7 @@ See astropy.sphinx.conf for which values are set there.
 import os
 import sys
 from datetime import datetime, timezone
+from importlib import metadata
 from pathlib import Path
 
 if sys.version_info < (3, 11):
@@ -159,7 +160,7 @@ nitpick_ignore = []
 nitpick_filename = 'nitpick-exceptions.txt'
 if os.path.isfile(nitpick_filename):
     for line in open(nitpick_filename):
-        if line.strip() == "" or line.startswith("#"):
+        if line.strip() == '' or line.startswith('#'):
             continue
         dtype, target = line.split(None, 1)
         target = target.strip()
