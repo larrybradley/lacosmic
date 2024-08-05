@@ -28,27 +28,35 @@ class TestLACosmic:
     """
 
     def test_lacosmic(self):
-        """Test basic lacosmic."""
+        """
+        Test basic lacosmic.
+        """
         crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR)
         assert_allclose(crclean_img, IMG, atol=2.)
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_background_scalar(self):
-        """Test lacosmic with a background scalar."""
+        """
+        Test lacosmic with a background scalar.
+        """
         crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR,
                                            background=10)
         assert_allclose(crclean_img, IMG, atol=2.)
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_background_maxiter(self):
-        """Test lacosmic with a background scalar."""
+        """
+        Test lacosmic with a background scalar.
+        """
         crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR,
                                            background=10, maxiter=1)
         assert_allclose(crclean_img, IMG, atol=2.)
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_background_image(self):
-        """Test lacosmic with a 2D background image."""
+        """
+        Test lacosmic with a 2D background image.
+        """
         bkgrd_img = np.ones(IMG.shape) * 10.
         crclean_img, crmask_img = lacosmic(CR_IMG, 1, 40, 50, error=ERROR,
                                            background=bkgrd_img)
@@ -56,7 +64,9 @@ class TestLACosmic:
         assert_array_equal(crmask_img, MASK_REF)
 
     def test_mask_image(self):
-        """Test lacosmic with an input mask image."""
+        """
+        Test lacosmic with an input mask image.
+        """
         mask = MASK_REF.copy()
         mask[0:10, 0:10] = False
         mask_ref2 = np.logical_and(MASK_REF, ~mask)
@@ -66,7 +76,9 @@ class TestLACosmic:
         assert_array_equal(crmask_img, mask_ref2)
 
     def test_large_cosmics(self):
-        """Test lacosmic cleaning with large cosmic rays."""
+        """
+        Test lacosmic cleaning with large cosmic rays.
+        """
         test_img = np.ones((7, 7))
         test_img[1:6, 1:6] = 100.
         mask_ref2 = np.zeros((7, 7), dtype=bool)

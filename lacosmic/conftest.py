@@ -14,7 +14,7 @@ except ImportError:
     ASTROPY_HEADER = False
 
 # do not remove until we drop support for NumPy < 2.0
-if minversion(np, "2.0.0.dev0+git20230726"):
+if minversion(np, '2.0.0.dev0+git20230726'):
     np.set_printoptions(legacy='1.25')
 
 
@@ -26,7 +26,7 @@ def pytest_configure(config):
         # list of packages for which version numbers are displayed when
         # running the tests.
         PYTEST_HEADER_MODULES.clear()
-        deps = ['NumPy', 'SciPy', 'Matplotlib']
+        deps = ['NumPy', 'SciPy', 'Matplotlib', 'Astropy']
         for dep in deps:
             PYTEST_HEADER_MODULES[dep] = dep.lower()
 

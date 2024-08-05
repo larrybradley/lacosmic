@@ -24,11 +24,11 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Astronomy',
 ]
 dynamic = ['version']
-requires-python = '>=3.9'
+requires-python = '>=3.10'
 dependencies = [
-    'numpy>=1.22',
-    'astropy>=5.0',
-    'scipy>=1.7.2',
+    'numpy>=1.24',
+    'astropy>=5.1',
+    'scipy>=1.10',
 ]
 
 [project.urls]
@@ -37,15 +37,15 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 
 [project.optional-dependencies]
 all = [
-    'matplotlib>=3.5',
+    'matplotlib>=3.6',
 ]
 test = [
-    'pytest-astropy>=0.10',
+    'pytest-astropy>=0.11',
 ]
 docs = [
     'lacosmic[all]',
     'sphinx',
-    'sphinx-astropy>=1.6',
+    'sphinx-astropy>=1.9',
     'tomli; python_version < "3.11"',
 ]
 
@@ -53,6 +53,7 @@ docs = [
 requires = [
     'setuptools>=61.2',
     'setuptools_scm>=6.2',
+    'numpy>=2.0.0',
 ]
 build-backend = 'setuptools.build_meta'
 
@@ -84,15 +85,20 @@ norecursedirs = [
 astropy_header = true
 doctest_plus = 'enabled'
 text_file_format = 'rst'
-addopts = '--color=yes --doctest-rst'
+addopts = [
+    '-ra',
+    '--color=yes',
+    '--doctest-rst',
+    '--strict-config',
+    '--strict-markers',
+]
+log_cli_level = 'INFO'
 xfail_strict = true
 remote_data_strict = true
 filterwarnings = [
     'error',  # turn warnings into exceptions
     'ignore:numpy.ufunc size changed:RuntimeWarning',
     'ignore:numpy.ndarray size changed:RuntimeWarning',
-    # python 3.12 deprecation in matplotlib 3.9dev
-    'ignore:datetime.datetime.utcfromtimestamp\(\) is deprecated:DeprecationWarning',
 ]
 
 [tool.coverage.run]
@@ -124,8 +130,19 @@ exclude_lines = [
     'def _ipython_key_completions_',
 ]
 
-[tool.build-sphinx]
-github_project = 'spacetelescope/lacosmic'
+[tool.repo-review]
+ignore = [
+    'MY',  # ignore MyPy
+    'RF',  # ignore Ruff
+    'PC110',  # ignore using black or ruff-format in pre-commit
+    'PC111',  # ignore using blacken-docs in pre-commit
+    'PC140',  # ignore using mypy in pre-commit
+    'PC180',  # ignore using prettier in pre-commit
+    'PC190',  # ignore using Ruff in pre-commit
+    'PC191',  # ignore showing Ruff fixes in pre-commit
+    'PC901',  # ignore using custom pre-commit update message
+    'PY005',  # ignore having a tests/ folder
+]
 
 [tool.isort]
 skip_glob = [
@@ -146,3 +163,29 @@ force-exclude = """
 
 [tool.bandit.assert_used]
 skips = ['*_test.py', '*/test_*.py']
+
+[tool.numpydoc_validation]
+checks = [
+    'all',   # report on all checks, except the below
+    'ES01',  # missing extended summary
+    'EX01',  # missing "Examples"
+    'SA01',  # missing "See Also"
+    'SA04',  # missing "See Also" description
+    'RT02',  # only type in "Returns" section (no name)
+    'SS06',  # single-line summary
+    'RT01',  # do not require return type for lazy properties
+]
+
+# don't report on objects that match any of these regex;
+# remember to use single quotes for regex in TOML
+exclude = [
+    '__init__',
+    '\._.*',  # private functions/methods
+    '^test_*',  # test code
+    '^conftest.*$',  # pytest configuration
+]
+
+[tool.docformatter]
+    wrap-summaries = 72
+    pre-summary-newline = true
+    make-summary-multi-line = true

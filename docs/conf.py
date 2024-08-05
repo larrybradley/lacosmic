@@ -1,20 +1,22 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
-#
-# Documentation build configuration file.
-#
-# This file is execfile()d with the current directory set to its
-# containing dir.
-#
-# Note that not all possible configuration values are present in this
-# file.
-#
-# All configuration values have a default. Some values are defined in
-# the global Astropy configuration which is loaded here before anything
-# else. See astropy.sphinx.conf for which values are set there.
+"""
+Documentation build configuration file.
+
+This file is execfile()d with the current directory set to its
+containing dir.
+
+Note that not all possible configuration values are present in this
+file.
+
+All configuration values have a default. Some values are defined in the
+global Astropy configuration which is loaded here before anything else.
+See astropy.sphinx.conf for which values are set there.
+"""
 
 import os
 import sys
 from datetime import datetime, timezone
+from importlib import metadata
 from pathlib import Path
 
 if sys.version_info < (3, 11):
@@ -51,8 +53,6 @@ del intersphinx_mapping['h5py']  # noqa: F405
 # directories to ignore when looking for source files.
 # exclude_patterns.append('_templates')
 
-plot_formats = ['png', 'hires.png', 'pdf', 'svg']
-
 # This is added to the end of RST files - a good place to put
 # substitutions to be used globally.
 rst_epilog = """
@@ -65,18 +65,18 @@ rst_epilog = """
 # -- Project information ------------------------------------------------------
 project = project_meta['name']
 author = project_meta['authors'][0]['name']
-copyright = f'2014-{datetime.now(tz=timezone.utc).year}, {author}'
+project_copyright = f'2014-{datetime.now(tz=timezone.utc).year}, {author}'
+github_project = 'larrybradley/lacosmic'
 
 # The version info for the project you're documenting, acts as
 # replacement for |version| and |release|, also used in various other
 # places throughout the built documents.
-__import__(project)
-package = sys.modules[project]
 
-# The short X.Y version.
-version = package.__version__.split('-', 1)[0]
 # The full version, including alpha/beta/rc tags.
-release = package.__version__
+release = metadata.version(project)
+# The short X.Y version.
+version = '.'.join(release.split('.')[:2])
+dev = 'dev' in release
 
 # -- Options for HTML output --------------------------------------------------
 # The global astropy configuration uses a custom theme,
@@ -138,7 +138,6 @@ man_pages = [('index', project.lower(), project + ' Documentation',
               [author], 1)]
 
 # -- Resolving issue number to links in changelog -----------------------------
-github_project = conf['tool']['build-sphinx']['github_project']
 github_issues_url = f'https://github.com/{github_project}/issues/'
 
 # -- Turn on nitpicky mode for sphinx (to warn about references not found) ----
@@ -161,7 +160,7 @@ nitpick_ignore = []
 nitpick_filename = 'nitpick-exceptions.txt'
 if os.path.isfile(nitpick_filename):
     for line in open(nitpick_filename):
-        if line.strip() == "" or line.startswith("#"):
+        if line.strip() == '' or line.startswith('#'):
             continue
         dtype, target = line.split(None, 1)
         target = target.strip()
