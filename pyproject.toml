@@ -124,9 +124,6 @@ exclude_lines = [
     'def _ipython_key_completions_',
 ]
 
-[tool.build-sphinx]
-github_project = 'spacetelescope/lacosmic'
-
 [tool.isort]
 skip_glob = [
     'lacosmic/*__init__.py*',
