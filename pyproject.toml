@@ -183,3 +183,8 @@ exclude = [
     '^test_*',  # test code
     '^conftest.*$',  # pytest configuration
 ]
+
+[tool.docformatter]
+    wrap-summaries = 72
+    pre-summary-newline = true
+    make-summary-multi-line = true
