@@ -202,8 +202,6 @@ ignore = [
     'D200',
     'D203',
     'D205',
-    'D212',
-    'D413',
     'EM101',
     'FBT002',
     'FIX002',
@@ -218,3 +216,6 @@ ignore = [
 '__init__.py' = ['D104', 'I']
 'conftest.py' = ['D103']
 'docs/conf.py' = ['ERA001', 'INP001', 'TRY400']
+
+[tool.ruff.lint.pydocstyle]
+convention = 'numpy'
