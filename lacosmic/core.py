@@ -96,7 +96,8 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         that case, try inputing a ``mask`` or increasing the value of
         ``cr_threshold``.
 
-    border_mode : {'reflect', 'constant', 'nearest', 'mirror', 'wrap'}, optional
+    border_mode : {'reflect', 'constant', 'nearest', 'mirror', 'wrap'}, \
+            optional
         The mode in which the array borders are handled during
         convolution and median filtering.  For 'constant', the fill
         value is 0.  The default is 'mirror', which matches the original
@@ -119,9 +120,8 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         clean_data += background
     final_crmask = np.zeros(data.shape, dtype=bool)
 
-    if error is not None:
-        if data.shape != error.shape:
-            raise ValueError('error and data must have the same shape')
+    if error is not None and data.shape != error.shape:
+        raise ValueError('error and data must have the same shape')
     clean_error_image = error
 
     ncosmics, ncosmics_tot = 0, 0

@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 from numpy.testing import assert_allclose, assert_array_equal
 
-from ..core import lacosmic
+from lacosmic.core import lacosmic
 
 size = 25
 npts = 20
@@ -93,13 +93,15 @@ class TestLACosmic:
         image.
         """
         error = np.zeros((7, 7))
-        with pytest.raises(ValueError):
+        match = 'error and data must have the same shape'
+        with pytest.raises(ValueError, match=match):
             lacosmic(CR_IMG, 3, 2, 2, effective_gain=1, readnoise=0,
                      error=error)
 
     def test_error_inputs(self):
-        with pytest.raises(ValueError):
+        match = 'effective_gain and readnoise must be input if error is not'
+        with pytest.raises(ValueError, match=match):
             lacosmic(CR_IMG, 3, 2, 2, effective_gain=1, error=None)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match=match):
             lacosmic(CR_IMG, 3, 2, 2, readnoise=0, error=None)
