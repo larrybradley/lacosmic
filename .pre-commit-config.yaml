@@ -92,7 +92,7 @@ repos:
       - id: numpydoc-validation
 
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.7.5
+    rev: 06907d0267368b49b9180eed423fae5697c1e909
     hooks:
       - id: docformatter
         additional_dependencies: [tomli]
