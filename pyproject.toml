@@ -2,7 +2,7 @@
 name = 'lacosmic'
 description = 'Laplacian Cosmic Ray Identification'
 readme = 'README.rst'
-license = {file = 'LICENSE.rst'}
+license-files = ['LICENSE.rst']
 authors = [
     {name = 'Larry Bradley', email = 'larry.bradley@gmail.com'},
 ]
@@ -16,7 +16,6 @@ keywords = [
 ]
 classifiers = [
     'Intended Audience :: Science/Research',
-    'License :: OSI Approved :: BSD License',
     'Natural Language :: English',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
