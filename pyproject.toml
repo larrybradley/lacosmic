@@ -204,6 +204,7 @@ ignore = [
     'FBT002',
     'FIX002',
     'I001',
+    'PLC0415',  # import-outside-top-level
     'PLR0913',
     'PTH',
     'Q000',
