@@ -23,11 +23,11 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Astronomy',
 ]
 dynamic = ['version']
-requires-python = '>=3.10'
+requires-python = '>=3.11'
 dependencies = [
-    'numpy>=1.24',
-    'astropy>=5.1',
-    'scipy>=1.10',
+    'numpy >= 1.26',
+    'astropy >= 5.3',
+    'scipy >= 1.12.0',
 ]
 
 [project.urls]
@@ -35,24 +35,26 @@ Homepage = 'https://github.com/larrybradley/lacosmic'
 Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 
 [project.optional-dependencies]
-all = [
-    'matplotlib>=3.6',
-]
 test = [
-    'pytest-astropy>=0.11',
+    'pytest-astropy >= 0.11',
+    'tox > 4.0',
 ]
 docs = [
-    'lacosmic[all]',
+    'lacosmic',
     'sphinx',
-    'sphinx-astropy>=1.9',
-    'tomli; python_version < "3.11"',
+    'sphinx-astropy >= 1.9',
+    'matplotlib >= 3.8',
+]
+dev = [
+   'lacosmic[docs,test]',
+   'pre-commit > 4.0',
 ]
 
 [build-system]
 requires = [
-    'setuptools>=61.2',
-    'setuptools_scm>=6.2',
-    'numpy>=2.0.0',
+    'setuptools >= 77.0',
+    'setuptools_scm >= 8.0',
+    'numpy >= 2.0.0',
 ]
 build-backend = 'setuptools.build_meta'
 

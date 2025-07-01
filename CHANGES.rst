@@ -7,15 +7,13 @@ General
 - The ``lacosmic.test`` function has been removed. Instead use the
   ``pytest --pyarg lacosmic`` command. [#25]
 
-- The minimum required Python version is 3.10. [#26]
+- The minimum required Python version is 3.11. [#26, #47]
 
-- The minimum required Numpy version is 1.24. [#26]
+- The minimum required Numpy version is 1.26. [#26, #47]
 
-- The minimum required Scipy version is 1.10. [#26]
+- The minimum required Scipy version is 1.12. [#26, #47]
 
-- The minimum required Matplotlib version is 3.6. [#26]
-
-- The minimum required Astropy version is 5.1. [#26]
+- The minimum required Astropy version is 5.3. [#26, #47]
 
 
 1.1.0 (2023-11-16)
