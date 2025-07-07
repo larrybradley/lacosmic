@@ -189,10 +189,12 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
 
 def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
     """
-    Clean masked pixels in an image.  Each masked pixel is replaced by
-    the median of unmasked pixels in a 2D window of ``size`` centered on
-    it.  If all pixels in the window are masked, then the window is
-    increased in size until unmasked pixels are found.
+    Clean masked pixels in an image.
+
+    Each masked pixel is replaced by the median of unmasked pixels in a
+    2D window of ``size`` centered on it. If all pixels in the window
+    are masked, then the window is increased in size until unmasked
+    pixels are found.
 
     Pixels in ``exclude_mask`` are not cleaned, but they are excluded
     when calculating the local median.
