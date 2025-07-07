@@ -21,7 +21,7 @@ Requirements
 
 * `SciPy <https://scipy.org/>`_ 1.12 or later
 
-* `Astropy`_ 5.3 or later
+* `Astropy`_ 6.0 or later
 
 
 Installation
