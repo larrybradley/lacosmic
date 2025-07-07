@@ -121,7 +121,8 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
     final_crmask = np.zeros(data.shape, dtype=bool)
 
     if error is not None and data.shape != error.shape:
-        raise ValueError('error and data must have the same shape')
+        msg = 'error must have the same shape as data'
+        raise ValueError(msg)
     clean_error_image = error
 
     ncosmics, ncosmics_tot = 0, 0
@@ -133,8 +134,9 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
 
         if clean_error_image is None:
             if effective_gain is None or readnoise is None:
-                raise ValueError('effective_gain and readnoise must be '
-                                 'input if error is not input')
+                msg = ('effective_gain and readnoise must be input if error '
+                       'is not input')
+                raise ValueError(msg)
             med5_img = ndimage.median_filter(clean_data, size=5,
                                              mode=border_mode).clip(min=1.e-5)
             error_image = (np.sqrt(effective_gain * med5_img + readnoise ** 2)
@@ -200,14 +202,20 @@ def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
     when calculating the local median.
     """
     if (size % 2) != 1:  # pragma: no cover
-        raise ValueError('size must be an odd integer')
+        msg = 'size must be an odd integer'
+        raise ValueError(msg)
+
     if data.shape != mask.shape:  # pragma: no cover
-        raise ValueError('mask must have the same shape as data')
+        msg = 'mask must have the same shape as data'
+        raise ValueError(msg)
+
     ny, nx = data.shape
     mask_coords = np.argwhere(mask)
     if exclude_mask is not None:
         if data.shape != exclude_mask.shape:  # pragma: no cover
-            raise ValueError('exclude_mask must have the same shape as data')
+            msg = 'exclude_mask must have the same shape as data'
+            raise ValueError(msg)
+
         maskall = np.logical_or(mask, exclude_mask)
     else:
         maskall = mask
@@ -229,7 +237,7 @@ def _clean_masked_pixels(data, mask, size=5, exclude_mask=None):
     return data
 
 
-def _local_median(data_nanmask, x, y, nx, ny, size=5, expanded=False):
+def _local_median(data_nanmask, x, y, nx, ny, *, size=5, expanded=False):
     """
     Compute the local median in a 2D window, excluding NaN.
     """

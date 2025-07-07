@@ -98,9 +98,9 @@ dev = 'dev' in release
 # html_theme = None
 
 html_theme_options = {
-    'logotext1': 'lacosmic',  # white,  semi-bold
+    'logotext1': 'lacosmic',  # white, semi-bold
     'logotext2': '',  # orange, light
-    'logotext3': ':docs'   # white,  light
+    'logotext3': ':docs',  # white,  light
 }
 
 # Custom sidebar templates, maps document names to template names.

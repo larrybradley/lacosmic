@@ -93,7 +93,7 @@ class TestLACosmic:
         image.
         """
         error = np.zeros((7, 7))
-        match = 'error and data must have the same shape'
+        match = 'error must have the same shape as data'
         with pytest.raises(ValueError, match=match):
             lacosmic(CR_IMG, 3, 2, 2, effective_gain=1, readnoise=0,
                      error=error)
