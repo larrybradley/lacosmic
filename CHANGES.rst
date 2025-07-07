@@ -1,3 +1,19 @@
+1.4.0 (unreleased)
+------------------
+
+General
+^^^^^^^
+
+New Features
+^^^^^^^^^^^^
+
+Bug Fixes
+^^^^^^^^^
+
+API Changes
+^^^^^^^^^^^
+
+
 1.3.0 (2025-07-07)
 ------------------
 
@@ -14,6 +30,15 @@ General
 - The minimum required Scipy version is 1.12. [#26, #47]
 
 - The minimum required Astropy version is 6.0. [#26, #47, #49]
+
+
+1.2.0 (2025-07-07)
+------------------
+
+General
+^^^^^^^
+
+- Version 1.2.0 was yanked from PyPI due to a packaging error.
 
 
 1.1.0 (2023-11-16)
