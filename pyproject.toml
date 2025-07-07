@@ -26,7 +26,7 @@ dynamic = ['version']
 requires-python = '>=3.11'
 dependencies = [
     'numpy >= 1.26',
-    'astropy >= 5.3',
+    'astropy >= 6.0',
     'scipy >= 1.12.0',
 ]
 

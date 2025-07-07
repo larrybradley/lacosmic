@@ -13,7 +13,7 @@ General
 
 - The minimum required Scipy version is 1.12. [#26, #47]
 
-- The minimum required Astropy version is 5.3. [#26, #47]
+- The minimum required Astropy version is 6.0. [#26, #47, #49]
 
 
 1.1.0 (2023-11-16)
