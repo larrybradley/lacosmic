@@ -2,6 +2,7 @@
 name = 'lacosmic'
 description = 'Laplacian Cosmic Ray Identification'
 readme = 'README.rst'
+license = 'BSD-3-Clause'
 license-files = ['LICENSE.rst']
 authors = [
     {name = 'Larry Bradley', email = 'larry.bradley@gmail.com'},
