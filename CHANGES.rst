@@ -4,6 +4,10 @@
 General
 ^^^^^^^
 
+- The minimum required Numpy version is 2.0. [#59]
+
+- The minimum required Matplotlib version is 3.9. [#59]
+
 New Features
 ^^^^^^^^^^^^
 
