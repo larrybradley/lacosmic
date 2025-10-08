@@ -17,11 +17,11 @@ Requirements
 
 * `Python <https://www.python.org/>`_ 3.11 or later
 
-* `NumPy <https://numpy.org/>`_ 1.26 or later
+* `NumPy <https://numpy.org/>`_ 2.0 or later
 
-* `SciPy <https://scipy.org/>`_ 1.12 or later
+* `SciPy <https://scipy.org/>`_ 1.13 or later
 
-* `Astropy`_ 6.0 or later
+* `Astropy`_ 6.1 or later
 
 
 Installation

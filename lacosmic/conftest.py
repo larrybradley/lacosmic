@@ -3,8 +3,6 @@
 Configuration file for the pytest test suite.
 """
 
-import numpy as np
-from astropy.utils import minversion
 
 try:
     from pytest_astropy_header.display import (PYTEST_HEADER_MODULES,
@@ -12,10 +10,6 @@ try:
     ASTROPY_HEADER = True
 except ImportError:
     ASTROPY_HEADER = False
-
-# do not remove until we drop support for NumPy < 2.0
-if minversion(np, '2.0.0.dev0+git20230726'):
-    np.set_printoptions(legacy='1.25')
 
 
 def pytest_configure(config):

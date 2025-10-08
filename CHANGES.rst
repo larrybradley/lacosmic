@@ -4,6 +4,14 @@
 General
 ^^^^^^^
 
+- The minimum required Numpy version is 2.0. [#59]
+
+- The minimum required Numpy version is 6.1. [#59]
+
+- The minimum required Scipy version is 1.13. [#59]
+
+- The minimum required Matplotlib version is 3.9. [#59]
+
 New Features
 ^^^^^^^^^^^^
 

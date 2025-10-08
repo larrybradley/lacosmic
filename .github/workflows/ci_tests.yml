@@ -48,51 +48,57 @@ jobs:
             allow_failure: false
             prefix: ''
 
-          - os: macos-latest
+          - os: ubuntu-latest
             python: '3.13'
             tox_env: 'py313-test-alldeps'
+            allow_failure: false
+            prefix: ''
+
+          - os: ubuntu-latest
+            python: '3.14'
+            tox_env: 'py314-test-alldeps-cov'
+            allow_failure: false
+            prefix: ''
+
+          - os: macos-latest
+            python: '3.14'
+            tox_env: 'py314-test-alldeps'
             allow_failure: false
             prefix: ''
 
           - os: windows-latest
-            python: '3.13'
-            tox_env: 'py313-test-alldeps'
+            python: '3.14'
+            tox_env: 'py314-test-alldeps'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
-            python: '3.13'
-            tox_env: 'py313-test-alldeps-cov'
-            allow_failure: false
-            prefix: ''
-
-          - os: ubuntu-latest
-            python: '3.13'
+            python: '3.x'
             tox_env: 'codestyle'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
-            python: '3.13'
+            python: '3.x'
             tox_env: 'linkcheck'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
-            python: '3.13'
+            python: '3.x'
             tox_env: 'pep517'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
-            python: '3.13'
+            python: '3.x'
             tox_env: 'bandit'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
-            python: '3.13'
-            tox_env: 'py313-test-devdeps'
+            python: '3.14'
+            tox_env: 'py314-test-devdeps'
             toxposargs: --remote-data=any
             allow_failure: true
             prefix: '(Allowed failure)'

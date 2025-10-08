@@ -26,9 +26,9 @@ classifiers = [
 dynamic = ['version']
 requires-python = '>=3.11'
 dependencies = [
-    'numpy >= 1.26',
-    'astropy >= 6.0',
-    'scipy >= 1.12.0',
+    'numpy >= 2.0',
+    'astropy >= 6.1',
+    'scipy >= 1.13',
 ]
 
 [project.urls]
@@ -38,13 +38,13 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 [project.optional-dependencies]
 test = [
     'pytest-astropy >= 0.11',
-    'tox > 4.0',
+    'tox > 4.24',
 ]
 docs = [
     'lacosmic',
     'sphinx',
     'sphinx-astropy >= 1.9',
-    'matplotlib >= 3.8',
+    'matplotlib >= 3.9',
 ]
 dev = [
    'lacosmic[docs,test]',
@@ -55,7 +55,7 @@ dev = [
 requires = [
     'setuptools >= 77.0',
     'setuptools_scm >= 8.0',
-    'numpy >= 2.0.0',
+    'numpy >= 2.0',
 ]
 build-backend = 'setuptools.build_meta'
 
