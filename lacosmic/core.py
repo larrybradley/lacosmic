@@ -96,12 +96,12 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
         that case, try inputing a ``mask`` or increasing the value of
         ``cr_threshold``.
 
-    border_mode : {'reflect', 'constant', 'nearest', 'mirror', 'wrap'}, \
-            optional
+    border_mode : str, optional
         The mode in which the array borders are handled during
-        convolution and median filtering.  For 'constant', the fill
-        value is 0.  The default is 'mirror', which matches the original
-        L.A.Cosmic algorithm.
+        convolution and median filtering. The options are 'reflect',
+        'constant', 'nearest', 'mirror', or 'wrap'. For 'constant', the
+        fill value is 0. The default is 'mirror', which matches the
+        original L.A.Cosmic algorithm.
 
     Returns
     -------
