@@ -38,23 +38,23 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 [project.optional-dependencies]
 test = [
     'pytest-astropy >= 0.11',
-    'tox > 4.24',
+    'tox >= 4.24',
 ]
 docs = [
     'lacosmic',
-    'sphinx',
+    'sphinx >= 8.2',  # keep in sync with docs/conf.py
     'sphinx-astropy >= 1.9',
     'matplotlib >= 3.9',
 ]
 dev = [
-   'lacosmic[docs,test]',
-   'pre-commit > 4.0',
+    'lacosmic[docs,test]',
+    'pre-commit >= 4.0',
 ]
 
 [build-system]
 requires = [
     'setuptools >= 77.0',
-    'setuptools_scm >= 8.0',
+    'setuptools_scm >= 8.1',
     'numpy >= 2.0',
 ]
 build-backend = 'setuptools.build_meta'
@@ -75,7 +75,7 @@ namespaces = false
 ]
 
 [tool.pytest.ini_options]
-minversion = 7.0
+minversion = "8.0"
 testpaths = [
     'lacosmic',
     'docs',
@@ -100,7 +100,6 @@ xfail_strict = true
 remote_data_strict = true
 filterwarnings = [
     'error',  # turn warnings into exceptions
-    'ignore:numpy.ndarray size changed:RuntimeWarning',
 ]
 
 [tool.coverage.run]
@@ -132,6 +131,25 @@ exclude_lines = [
     'def _ipython_key_completions_',
 ]
 
+[tool.isort]
+skip_glob = [
+    'lacosmic/*__init__.py*',
+]
+known_first_party = [
+    'lacosmic',
+]
+use_parentheses = true
+
+[tool.black]
+force-exclude = """
+(
+  .*
+)
+"""
+
+[tool.bandit.assert_used]
+skips = ['*_test.py', '*/test_*.py']
+
 [tool.repo-review]
 ignore = [
     'MY',  # ignore MyPy
@@ -145,25 +163,10 @@ ignore = [
     'PY005',  # ignore having a tests/ folder
 ]
 
-[tool.isort]
-skip_glob = [
-    'lacosmic/*__init__.py*',
-]
-known_first_party = [
-    'lacosmic',
-    'extension_helpers',
-]
-use_parentheses = true
-
-[tool.black]
-force-exclude = """
-(
-  .*
-)
-"""
-
-[tool.bandit.assert_used]
-skips = ['*_test.py', '*/test_*.py']
+[tool.docformatter]
+    wrap-summaries = 72
+    pre-summary-newline = true
+    make-summary-multi-line = true
 
 [tool.numpydoc_validation]
 checks = [
@@ -186,11 +189,6 @@ exclude = [
     '^conftest.*$',  # pytest configuration
 ]
 
-[tool.docformatter]
-    wrap-summaries = 72
-    pre-summary-newline = true
-    make-summary-multi-line = true
-
 [tool.ruff]
 line-length = 79
 
@@ -211,7 +209,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-'__init__.py' = ['D104', 'I']
+'__init__.py' = ['D104', 'I', 'RUF100']
 'conftest.py' = ['D103', 'I']
 'docs/conf.py' = ['ERA001', 'INP001', 'TRY400']
 'test_*.py' = ['D']

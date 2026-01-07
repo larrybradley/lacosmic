@@ -38,7 +38,7 @@ The latest released (stable) version of lacosmic can be installed with
 User Documentation
 ==================
 
-.. automodapi:: lacosmic.core
+.. automodapi:: lacosmic
     :no-heading:
 
 

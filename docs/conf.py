@@ -41,7 +41,7 @@ with (Path(__file__).parents[1] / 'pyproject.toml').open('rb') as fh:
 highlight_language = 'python3'
 
 # If your documentation needs a minimal Sphinx version, state it here.
-# needs_sphinx = '3.0'
+needs_sphinx = '8.2'  # keep in sync with pyproject.toml
 
 # Extend astropy intersphinx_mapping with packages we use here
 # intersphinx_mapping.update(  # nosq: F405
