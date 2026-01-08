@@ -17,6 +17,10 @@ with (Path(__file__).parents[1] / 'pyproject.toml').open('rb') as fh:
 # By default, highlight as Python 3.
 highlight_language = 'python3'
 
+# The reST default role (used for this markup: `text`) to use for all
+# documents.
+default_role = 'py:obj'
+
 # If your documentation needs a minimal Sphinx version, state it here.
 needs_sphinx = '8.2'  # keep in sync with pyproject.toml
 
@@ -27,9 +31,11 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
     'sphinx_automodapi.automodapi',
+    'sphinx_copybutton',
     'matplotlib.sphinxext.plot_directive',
     'numpydoc',
     'pytest_doctestplus.sphinx.doctestplus',
+    'sphinx_astropy.ext.changelog_links',
 ]
 
 # List of patterns, relative to source directory, that match files and
