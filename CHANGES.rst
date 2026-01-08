@@ -21,6 +21,11 @@ Bug Fixes
 API Changes
 ^^^^^^^^^^^
 
+- The ``lacosmic`` function has been renamed to ``remove_cosmics``.
+  The ``lacosmic`` function is still available as an alias for backward
+  compatibility, but it is deprecated and will be removed in a future
+  release. [#72]
+
 
 1.3.0 (2025-07-07)
 ------------------

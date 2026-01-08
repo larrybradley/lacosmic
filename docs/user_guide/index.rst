@@ -46,18 +46,18 @@ Let's visualize the image with cosmic rays:
 Removing Cosmic Rays
 --------------------
 
-Now we can use the :func:`~lacosmic.lacosmic` function to identify
-and remove the cosmic rays. There are several parameters that can
-be adjusted to optimize the detection of cosmic rays. Please refer
-to the :func:`~lacosmic.lacosmic` API documentation for details on
+Now we can use the :func:`~lacosmic.remove_cosmics` function to identify
+and remove the cosmic rays. There are several parameters that can be
+adjusted to optimize the detection of cosmic rays. Please refer to
+the :func:`~lacosmic.remove_cosmics` API documentation for details on
 the available parameters. Here, we will input simple values for the
 ``contrast``, ``cr_threshold``, and ``neighbor_threshold`` along with an
 ``error`` array:
 
 .. doctest-skip::
 
-    >>> from lacosmic import lacosmic
-    >>> clean_img, cr_mask = lacosmic(data2, 1, 5, 5, error=error)
+    >>> from lacosmic import remove_cosmics
+    >>> clean_img, cr_mask = remove_cosmics(data2, 1, 5, 5, error=error)
 
 ``clean_img`` is the cleaned image with cosmic rays removed, and
 ``cr_mask`` is a boolean mask indicating the locations of the detected
@@ -69,7 +69,7 @@ Now let’s visualize the results:
 
     import matplotlib.pyplot as plt
     from astropy.visualization import simple_norm
-    from lacosmic import lacosmic
+    from lacosmic import remove_cosmics
     from lacosmic.utils import make_cosmic_rays, make_gaussian_sources
 
     # Create synthetic data
@@ -80,7 +80,7 @@ Now let’s visualize the results:
     data2 = data + cr_img
 
     # Remove cosmic rays
-    clean_img, cr_mask = lacosmic(data2, 1, 5, 5, error=error)
+    clean_img, cr_mask = remove_cosmics(data2, 1, 5, 5, error=error)
 
     # True cosmic ray mask for comparison
     true_crmask = cr_img > 0

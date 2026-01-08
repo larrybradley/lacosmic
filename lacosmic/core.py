@@ -7,15 +7,17 @@ L.A.Cosmic algorithm (van Dokkum 2001; PASP 113, 1420).
 import numpy as np
 from astropy import log
 from astropy.nddata import block_reduce, block_replicate
+from astropy.utils.decorators import deprecated
 from scipy import ndimage
 
-__all__ = ['lacosmic']
+__all__ = ['remove_cosmics']
 
 
-def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
-             error=None, mask=None, background=None, effective_gain=None,
-             readnoise=None, maxiter=4, border_mode='mirror'):
-    r"""
+def _create_docstring(func):
+    """
+    Create the docstring for the `remove_cosmics` function.
+    """
+    docstr = r"""
     Remove cosmic rays from an astronomical image using the L.A.Cosmic
     algorithm.
 
@@ -110,6 +112,41 @@ def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
     crmask : `~numpy.ndarray` (bool)
         A mask image of the identified cosmic rays.  Cosmic-ray pixels
         have a value of `True`.
+    """
+
+    func.__doc__ = docstr
+    return func
+
+
+@deprecated(since='1.4', message=('The lacosmic function is deprecated and '
+                                  'will be removed in a future version. Use '
+                                  'remove_cosmics instead.'),
+            alternative='remove_cosmics')
+@_create_docstring
+def lacosmic(data, contrast, cr_threshold, neighbor_threshold,
+             error=None, mask=None, background=None, effective_gain=None,
+             readnoise=None, maxiter=4, border_mode='mirror'):
+    # numpydoc ignore: PR01
+    """
+    Remove cosmic rays from an astronomical image using the L.A.Cosmic
+    algorithm.
+    """
+    return remove_cosmics(data, contrast, cr_threshold,
+                          neighbor_threshold, error=error, mask=mask,
+                          background=background,
+                          effective_gain=effective_gain,
+                          readnoise=readnoise, maxiter=maxiter,
+                          border_mode=border_mode)
+
+
+@_create_docstring
+def remove_cosmics(data, contrast, cr_threshold, neighbor_threshold,
+                   error=None, mask=None, background=None, effective_gain=None,
+                   readnoise=None, maxiter=4, border_mode='mirror'):
+    # numpydoc ignore: PR01
+    """
+    Remove cosmic rays from an astronomical image using the L.A.Cosmic
+    algorithm.
     """
     block_size = 2.0
     kernel = np.array([[0.0, -1.0, 0.0], [-1.0, 4.0, -1.0], [0.0, -1.0, 0.0]])
