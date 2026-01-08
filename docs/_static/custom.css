@@ -1,0 +1,37 @@
+/* Custom CSS for modifying heading sizes and spacing in
+ * documentation */
+:root {
+  --pst-font-size-h1: 2.0rem;
+  --pst-font-size-h2: 1.6rem;
+  --pst-font-size-h3: 1.35rem;
+  --pst-font-size-h4: 1.15rem;
+  --pst-font-size-h5: 1.0rem;
+  --pst-font-size-h6: 0.9rem;
+}
+
+.section {
+  margin-bottom: 1.6rem;
+}
+
+p {
+  margin-bottom: 0.7rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Reduce space above the page title (H1) */
+.bd-content h1 {
+  margin-top: 0.0rem;
+}
+.bd-article {
+  padding-top: 0.15rem;
+}
+
+.bd-content h2 {
+  border-bottom: 2px solid var(--pst-color-border);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.2rem;
+}
