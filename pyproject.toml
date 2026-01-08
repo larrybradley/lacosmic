@@ -43,8 +43,11 @@ test = [
 docs = [
     'lacosmic',
     'sphinx >= 8.2',  # keep in sync with docs/conf.py
-    'sphinx-astropy >= 1.9',
+    'pydata-sphinx-theme >= 0.16',
+    'sphinx-automodapi >= 0.18',
+    'numpydoc >= 1.8',
     'matplotlib >= 3.9',
+    'pytest-doctestplus >= 1.0',
 ]
 dev = [
     'lacosmic[docs,test]',
