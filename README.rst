@@ -8,7 +8,7 @@ lacosmic is a Python package to remove cosmic rays from an
 astronomical image using the `L.A.Cosmic algorithm
 <http://www.astro.yale.edu/dokkum/lacosmic/>`_.  The algorithm is
 based on Laplacian edge detection and is described in `van Dokkum
-(2001; PASP 113, 1420)
+2001 (PASP 113, 1420)
 <https://ui.adsabs.harvard.edu/abs/2001PASP..113.1420V/abstract>`_.
 
 
