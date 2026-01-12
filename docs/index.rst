@@ -20,8 +20,7 @@ and is described in `van Dokkum 2001 (PASP 113, 1420)
 .. admonition:: Important
 
     If you use ``lacosmic`` for a project that leads to a
-    publication, whether directly or as a dependency of another
-    package, please include a citation to the `Zenodo record
+    publication, please include a citation to the `Zenodo record
     <https://doi.org/10.5281/zenodo.6468623>`_.
 
 |br|
