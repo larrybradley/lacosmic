@@ -3,82 +3,84 @@
 Configuration file for the pytest test suite.
 """
 
-import tomllib
-from importlib.metadata import version
-from pathlib import Path
+from importlib.metadata import packages_distributions, requires, version
+
+from packaging.requirements import Requirement
 
 try:
     from pytest_astropy_header.display import (PYTEST_HEADER_MODULES,
                                                TESTED_VERSIONS)
-    ASTROPY_HEADER = True
 except ImportError:
-    ASTROPY_HEADER = False
+    PYTEST_HEADER_MODULES = {}
+    TESTED_VERSIONS = {}
 
 
-def _get_dependencies_from_pyproject():
+def _get_self_dependencies(extra='all'):
     """
-    Extract project dependencies and name from pyproject.toml.
-
-    Returns
-    -------
-    result : tuple of (str, list of str)
-        Project name and list of package names extracted from the
-        dependencies and optional-dependencies.all.
-    """
-    pyproject_path = Path(__file__).parent.parent / 'pyproject.toml'
-    with open(pyproject_path, 'rb') as f:
-        pyproject_data = tomllib.load(f)
-
-    project_name = pyproject_data.get('project', {}).get('name', '')
-    dependencies = pyproject_data.get('project', {}).get('dependencies', [])
-
-    # Also include optional dependencies under "all" if present
-    optional_deps = (
-        pyproject_data.get('project', {})
-        .get('optional-dependencies', {})
-        .get('all', [])
-    )
-    all_deps = dependencies + optional_deps
-
-    # Extract package names from dependency specifications
-    # (e.g., 'numpy >= 2.0' -> 'numpy')
-    package_names = []
-    for dep in all_deps:
-        # Split on common version specifiers and take the first part
-        pkg_name = dep.split('[')[0].split('>')[0].split('<')[0].split(
-            '=')[0].split('!')[0].split('~')[0].strip()
-        # Skip self-references to the project itself
-        if pkg_name.lower() == project_name.lower():
-            continue
-        package_names.append(pkg_name)
-
-    # Sort alphabetically for consistent output
-    package_names.sort(key=str.lower)
-
-    return project_name, package_names
-
-
-def pytest_configure(config):
-    """
-    Configure pytest settings.
+    Get the package name and its dependencies.
 
     Parameters
     ----------
-    config : pytest.Config
-        The pytest configuration object.
+    extra : str, optional
+        The extra requirements to consider (default is "all").
+
+    Returns
+    -------
+    result : tuple
+        A tuple containing the package name and a sorted list of its
+        dependencies.
+
+    Notes
+    -----
+    This function requires the package to be installed with valid
+    metadata (e.g., via pip) in the current environment. Note that
+    for namespace packages, a single import name may map to multiple
+    distributions; this implementation identifies the first distribution
+    found in the mapping.
     """
-    if ASTROPY_HEADER:
-        config.option.astropy_header = True
+    pkg_dists = packages_distributions()
 
-        # Customize the following lines to add/remove entries from the
-        # list of packages for which version numbers are displayed when
-        # running the tests.
-        PYTEST_HEADER_MODULES.clear()
+    # Build a reverse lookup map:
+    # {'scikit-learn': 'sklearn', 'Pillow': 'PIL', ...}
+    # packages_distributions() returns {'sklearn': ['scikit-learn'], ...}
+    dist_to_import = {}
+    for import_name, dist_names in pkg_dists.items():
+        for dist in dist_names:
+            dist_to_import[dist.lower()] = import_name
 
-        # Get dependencies from pyproject.toml
-        project_name, deps = _get_dependencies_from_pyproject()
+    # Determine which package this file belongs to
+    import_name = __name__.split('.')[0]
+    dist_names = pkg_dists.get(import_name)
 
-        for dep in deps:
-            PYTEST_HEADER_MODULES[dep] = dep
+    if not dist_names:
+        msg = (f"Could not find the distribution for the package "
+               f"containing '{import_name}'. This usually means that the "
+               f"package is not installed in the current environment.")
+        raise RuntimeError(msg)
 
-        TESTED_VERSIONS[project_name] = version(project_name)
+    package_name = dist_names[0]
+    raw_reqs = requires(package_name) or []
+
+    dependencies = []
+    for req_str in raw_reqs:
+        req = Requirement(req_str)
+        if not req.marker or req.marker.evaluate({'extra': extra}):
+            dist_name = req.name.lower()
+            dep_name = dist_to_import.get(dist_name, req.name)
+            dependencies.append(dep_name)
+
+    return package_name, sorted(set(dependencies))
+
+
+def pytest_configure():
+    """
+    Configure pytest settings.
+    """
+    # Get dependencies from pyproject.toml
+    project_name, deps = _get_self_dependencies(extra='all')
+
+    PYTEST_HEADER_MODULES.clear()
+    for dep in deps:
+        PYTEST_HEADER_MODULES[dep] = dep
+
+    TESTED_VERSIONS[project_name] = version(project_name)
