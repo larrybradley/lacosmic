@@ -52,9 +52,9 @@ repository is called ``origin``.
 
 #. Optionally, :ref:`even more manual tests <manual_tests>` can be run.
 
-#. Push this new tag to the upstream repo::
+#. Push this new tag to the repository::
 
-        git push upstream <X.Y.Z>
+        git push origin <X.Y.Z>
 
    The new tag will trigger the automated `Publish workflow
    <https://github.com/larrybradley/lacosmic/actions/workflows/publish.yml>`_
@@ -106,11 +106,11 @@ repository is called ``origin``.
        API Changes
        ^^^^^^^^^^^
 
-   Then commit the changes and push to the upstream repo::
+   Then commit the changes and push to the repository::
 
         git add CHANGES.rst
         git commit -m'Add version <x.y.z> to the changelog'
-        git push upstream main
+        git push origin main
 
 
 .. _manual_tests:
@@ -119,7 +119,7 @@ Additional Manual Tests
 -----------------------
 
 These additional manual checks can be run before pushing the release tag
-to the upstream repository.
+to the repository.
 
 #. Remove any untracked files (**WARNING: this will permanently remove
    any files that have not been previously committed**, so make sure that
