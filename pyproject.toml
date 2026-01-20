@@ -210,7 +210,6 @@ ignore = [
     'PLC0415',  # import-outside-top-level
     'PLR0913',
     'PTH',
-    'Q000',
 ]
 
 [tool.ruff.lint.per-file-ignores]
@@ -221,3 +220,6 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = 'numpy'
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = 'single'
