@@ -26,8 +26,8 @@ classifiers = [
 dynamic = ['version']
 requires-python = '>=3.11'
 dependencies = [
-    'numpy >= 2.0',
     'astropy >= 6.1',
+    'numpy >= 2.0',
     'scipy >= 1.13',
 ]
 
@@ -41,15 +41,14 @@ test = [
     'tox >= 4.24',
 ]
 docs = [
-    'lacosmic',
-    'sphinx >= 8.2',  # keep in sync with docs/conf.py
+    'matplotlib >= 3.9',
+    'numpydoc >= 1.8',
     'pydata-sphinx-theme >= 0.16',
+    'pytest-doctestplus >= 1.0',
+    'sphinx >= 8.2',  # keep in sync with docs/conf.py
+    'sphinx-astropy[confv2] >= 1.9.1',
     'sphinx-automodapi >= 0.18',
     'sphinx-copybutton >= 0.5',
-    'numpydoc >= 1.8',
-    'matplotlib >= 3.9',
-    'pytest-doctestplus >= 1.0',
-    'sphinx-astropy[confv2] >= 1.9.1',
 ]
 dev = [
     'lacosmic[docs,test]',
