@@ -203,20 +203,22 @@ max-statements = 130
 [tool.ruff.lint]
 select = ['ALL']
 ignore = [
-    'ANN',
-    'D200',
-    'D205',
-    'FBT002',
+    'ANN',  # type annotations
+    'D200',  # unnecessary-multiline-docstring
+    'D205',  # missing-blank-line-after-summary
+    'FBT002',  # boolean-default-value-positional-argument
     'PLC0415',  # import-outside-top-level
-    'PLR0913',
-    'PTH',
+    'PLR0913',  # too-many-arguments
+    'PTH',  # Pathlib usage
 ]
 
 [tool.ruff.lint.per-file-ignores]
+# undocumented-public-package, isort, unused-noqa
 '__init__.py' = ['D104', 'I', 'RUF100']
-'conftest.py' = ['D103', 'I']
+'conftest.py' = ['D103', 'I001']  # undocumented-public-function, isort
+# commented-out-code, implicit-namespace-package, error-instead-of-exception
 'docs/conf.py' = ['ERA001', 'INP001', 'TRY400']
-'test_*.py' = ['D']
+'test_*.py' = ['D']  # pydocstyle
 
 [tool.ruff.lint.pydocstyle]
 convention = 'numpy'
