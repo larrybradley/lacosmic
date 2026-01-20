@@ -25,14 +25,14 @@ API Changes
 General
 ^^^^^^^
 
-- The ``lacosmic.test`` function has been removed. Instead use the
+- The ``lacosmic.test`` function has been removed. Instead, use the
   ``pytest --pyarg lacosmic`` command. [#25]
 
 - The minimum required Python version is 3.11. [#26, #47]
 
-- The minimum required Numpy version is 1.26. [#26, #47]
+- The minimum required NumPy version is 1.26. [#26, #47]
 
-- The minimum required Scipy version is 1.12. [#26, #47]
+- The minimum required SciPy version is 1.12. [#26, #47]
 
 - The minimum required Astropy version is 6.0. [#26, #47, #49]
 
@@ -54,9 +54,9 @@ General
 
 - The minimum required Python version is 3.9. [#19]
 
-- The minimum required Numpy version is 1.22. [#19]
+- The minimum required NumPy version is 1.22. [#19]
 
-- The minimum required Scipy version is 1.7.2. [#19]
+- The minimum required SciPy version is 1.7.2. [#19]
 
 - The minimum required Astropy version is 5.0. [#19]
 
@@ -72,14 +72,14 @@ General
 
 - The minimum required Python version is 3.8. [#11]
 
-- The minimum required Numpy version is 1.18. [#11]
+- The minimum required NumPy version is 1.18. [#11]
 
-- The minimum required Scipy version is 1.6.0. [#11]
+- The minimum required SciPy version is 1.6.0. [#11]
 
 - The minimum required Astropy version is 4.1. [#11]
 
 
-0.1.1 (2016.08.16)
+0.1.1 (2016-08-16)
 ------------------
 
 - Initial release.
