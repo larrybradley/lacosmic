@@ -38,37 +38,37 @@ jobs:
 
           - os: ubuntu-latest
             python: '3.11'
-            tox_env: 'py311-test-alldeps'
+            tox_env: 'py311-test'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
             python: '3.12'
-            tox_env: 'py312-test-alldeps'
+            tox_env: 'py312-test'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
             python: '3.13'
-            tox_env: 'py313-test-alldeps'
+            tox_env: 'py313-test'
             allow_failure: false
             prefix: ''
 
           - os: ubuntu-latest
             python: '3.14'
-            tox_env: 'py314-test-alldeps-cov'
+            tox_env: 'py314-test-cov'
             allow_failure: false
             prefix: ''
 
           - os: macos-latest
             python: '3.14'
-            tox_env: 'py314-test-alldeps'
+            tox_env: 'py314-test'
             allow_failure: false
             prefix: ''
 
           - os: windows-latest
             python: '3.14'
-            tox_env: 'py314-test-alldeps'
+            tox_env: 'py314-test'
             allow_failure: false
             prefix: ''
 
