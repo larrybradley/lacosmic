@@ -167,6 +167,11 @@ if os.path.isfile(nitpick_filename):
 
 # -- Options for linkcheck output ---------------------------------------------
 linkcheck_retry = 5
-linkcheck_ignore = ['http://data.astropy.org',
-                    r'https://github\.com/larrybradley/lacosmic/(?:issues|pull)/\d+']
+linkcheck_ignore = [
+    'http://data.astropy.org',
+    r'https://github\.com/larrybradley/lacosmic/(?:issues|pull)/\d+',
+    # Zenodo/doi: 403 Client Error: Forbidden for url
+    r'https://zenodo.org/records/*',
+    r'https://doi.org/*',
+]
 linkcheck_timeout = 180
