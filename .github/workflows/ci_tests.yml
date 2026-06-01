@@ -8,7 +8,7 @@ on:
       - '*'
   pull_request:
   schedule:
-    # run every Monday at 5am UTC
+    # Run every Monday at 5am UTC
     - cron: '0 5 * * 1'
   workflow_dispatch:
 
