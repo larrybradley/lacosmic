@@ -203,11 +203,13 @@ max-statements = 130
 select = ['ALL']
 ignore = [
     'ANN',  # type annotations
+    'CPY001',  # missing-copyright-notice
     'D200',  # unnecessary-multiline-docstring
     'D205',  # missing-blank-line-after-summary
     'FBT002',  # boolean-default-value-positional-argument
     'PLC0415',  # import-outside-top-level
     'PLR0913',  # too-many-arguments
+    'PLR0917',  # too-many-positional-arguments
     'PTH',  # Pathlib usage
 ]
 
