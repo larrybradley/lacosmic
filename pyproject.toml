@@ -196,14 +196,10 @@ exclude = [
 [tool.ruff]
 line-length = 79
 
-[tool.ruff.lint.pylint]
-max-statements = 130
-
 [tool.ruff.lint]
 select = ['ALL']
 ignore = [
     'ANN',  # type annotations
-    'CPY001',  # missing-copyright-notice
     'D200',  # unnecessary-multiline-docstring
     'D205',  # missing-blank-line-after-summary
     'FBT002',  # boolean-default-value-positional-argument
@@ -212,6 +208,13 @@ ignore = [
     'PLR0917',  # too-many-positional-arguments
     'PTH',  # Pathlib usage
 ]
+
+[tool.ruff.lint.flake8-copyright]
+min-file-size = 1  # skip empty files (< 1 byte), e.g., __init__.py
+notice-rgx = 'Licensed under a 3-clause BSD style license - see LICENSE.rst'
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = 'single'
 
 [tool.ruff.lint.per-file-ignores]
 '__init__.py' = [
@@ -235,5 +238,5 @@ ignore = [
 [tool.ruff.lint.pydocstyle]
 convention = 'numpy'
 
-[tool.ruff.lint.flake8-quotes]
-inline-quotes = 'single'
+[tool.ruff.lint.pylint]
+max-statements = 130
