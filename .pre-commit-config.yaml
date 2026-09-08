@@ -101,7 +101,7 @@ repos:
   #       args: [--in-place, --config, ./pyproject.toml]
   #       exclude: "extern/"
 
-  - repo: https://github.com/woodruffw/zizmor-pre-commit
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.30.0
     hooks:
       - id: zizmor
