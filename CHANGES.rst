@@ -4,6 +4,8 @@
 General
 ^^^^^^^
 
+- The minimum required Python version is 3.12. [#90]
+
 New Features
 ^^^^^^^^^^^^
 
