@@ -109,19 +109,13 @@ filterwarnings = [
 
 [tool.coverage.run]
 omit = [
-    'lacosmic/_astropy_init*',
     'lacosmic/conftest.py',
-    'lacosmic/*setup_package*',
     'lacosmic/tests/*',
     'lacosmic/*/tests/*',
-    'lacosmic/extern/*',
     'lacosmic/version*',
-    '*/lacosmic/_astropy_init*',
     '*/lacosmic/conftest.py',
-    '*/lacosmic/*setup_package*',
     '*/lacosmic/tests/*',
     '*/lacosmic/*/tests/*',
-    '*/lacosmic/extern/*',
     '*/lacosmic/version*',
 ]
 
