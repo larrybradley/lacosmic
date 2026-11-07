@@ -46,9 +46,8 @@ docs = [
     'matplotlib>=3.10',
     'numpydoc>=1.8',
     'pydata-sphinx-theme>=0.16',
-    'pytest-doctestplus>=1.4',
     'sphinx>=8.2',  # keep in sync with docs/conf.py
-    'sphinx-astropy[confv2]>=1.9.1',
+    'sphinx-astropy[confv2]>=1.11',
     'sphinx-automodapi>=0.18',
     'sphinx-copybutton>=0.5',
 ]
