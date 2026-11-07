@@ -22,7 +22,6 @@ jobs:
           - os: ubuntu-latest
             python: '3.14'
             tox_env: 'py314-test-predeps'
-            toxposargs: --remote-data
 
           - os: macos-latest
             python: '3.14'

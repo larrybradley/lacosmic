@@ -37,7 +37,9 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 
 [project.optional-dependencies]
 test = [
-    'pytest-astropy >= 0.11',
+    'pytest >= 8.0',
+    'pytest-astropy-header >= 0.2.1',
+    'pytest-doctestplus >= 1.0',
     'tox >= 4.24',
 ]
 docs = [
@@ -101,26 +103,19 @@ addopts = [
 log_level = 'INFO'
 log_cli_level = 'INFO'
 xfail_strict = true
-remote_data_strict = true
 filterwarnings = [
     'error',  # turn warnings into exceptions
 ]
 
 [tool.coverage.run]
 omit = [
-    'lacosmic/_astropy_init*',
     'lacosmic/conftest.py',
-    'lacosmic/*setup_package*',
     'lacosmic/tests/*',
     'lacosmic/*/tests/*',
-    'lacosmic/extern/*',
     'lacosmic/version*',
-    '*/lacosmic/_astropy_init*',
     '*/lacosmic/conftest.py',
-    '*/lacosmic/*setup_package*',
     '*/lacosmic/tests/*',
     '*/lacosmic/*/tests/*',
-    '*/lacosmic/extern/*',
     '*/lacosmic/version*',
 ]
 

@@ -99,7 +99,6 @@ jobs:
           - os: ubuntu-latest
             python: '3.15'
             tox_env: 'py315-test-devdeps'
-            toxposargs: --remote-data=any
             allow_failure: true
             prefix: '(Allowed failure)'
 
