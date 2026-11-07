@@ -26,9 +26,9 @@ classifiers = [
 dynamic = ['version']
 requires-python = '>=3.12'
 dependencies = [
-    'astropy >= 6.1',
-    'numpy >= 2.0',
-    'scipy >= 1.13',
+    'astropy>=7.0',
+    'numpy>=2.0',
+    'scipy>=1.15',
 ]
 
 [project.urls]
@@ -37,31 +37,30 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 
 [project.optional-dependencies]
 test = [
-    'pytest >= 8.0',
-    'pytest-astropy-header >= 0.2.1',
-    'pytest-doctestplus >= 1.0',
-    'tox >= 4.24',
+    'pytest>=8.0',
+    'pytest-astropy-header>=0.2.2',
+    'pytest-doctestplus>=1.4',
+    'tox>=4.24',
 ]
 docs = [
-    'matplotlib >= 3.9',
-    'numpydoc >= 1.8',
-    'pydata-sphinx-theme >= 0.16',
-    'pytest-doctestplus >= 1.0',
-    'sphinx >= 8.2',  # keep in sync with docs/conf.py
-    'sphinx-astropy[confv2] >= 1.9.1',
-    'sphinx-automodapi >= 0.18',
-    'sphinx-copybutton >= 0.5',
+    'matplotlib>=3.10',
+    'numpydoc>=1.8',
+    'pydata-sphinx-theme>=0.16',
+    'pytest-doctestplus>=1.4',
+    'sphinx>=8.2',  # keep in sync with docs/conf.py
+    'sphinx-astropy[confv2]>=1.9.1',
+    'sphinx-automodapi>=0.18',
+    'sphinx-copybutton>=0.5',
 ]
 dev = [
     'lacosmic[docs,test]',
-    'pre-commit >= 4.0',
+    'pre-commit>=4.0',
 ]
 
 [build-system]
 requires = [
-    'setuptools >= 77.0',
-    'setuptools_scm >= 8.1',
-    'numpy >= 2.0',
+    'setuptools>=77.0.1',
+    'setuptools_scm>=8.2',
 ]
 build-backend = 'setuptools.build_meta'
 
