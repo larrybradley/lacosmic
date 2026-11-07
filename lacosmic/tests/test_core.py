@@ -5,9 +5,11 @@ Tests for the core module.
 
 import numpy as np
 import pytest
+from astropy.utils.exceptions import AstropyDeprecationWarning
 from numpy.testing import assert_allclose, assert_array_equal
 
 from lacosmic import remove_cosmics
+from lacosmic.core import lacosmic
 
 size = 25
 npts = 20
@@ -108,3 +110,16 @@ class TestRemoveCosmics:
 
         with pytest.raises(ValueError, match=match):
             remove_cosmics(CR_IMG, 3, 2, 2, readnoise=0, error=None)
+
+
+def test_lacosmic_deprecated():
+    """
+    Test that the deprecated lacosmic function warns and returns the
+    same result as remove_cosmics.
+    """
+    match = 'The lacosmic function is deprecated'
+    with pytest.warns(AstropyDeprecationWarning, match=match):
+        result = lacosmic(CR_IMG, 1, 40, 50, error=ERROR)
+    expected = remove_cosmics(CR_IMG, 1, 40, 50, error=ERROR)
+    assert_array_equal(result[0], expected[0])
+    assert_array_equal(result[1], expected[1])
