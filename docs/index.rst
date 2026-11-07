@@ -38,9 +38,9 @@ Requirements
 
 * `NumPy <https://numpy.org/>`_ 2.0 or later
 
-* `SciPy <https://scipy.org/>`_ 1.13 or later
+* `SciPy <https://scipy.org/>`_ 1.15 or later
 
-* `Astropy <https://www.astropy.org/>`_ 6.1 or later
+* `Astropy <https://www.astropy.org/>`_ 7.0 or later
 
 
 Installing the latest released version
