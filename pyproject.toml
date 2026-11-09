@@ -47,7 +47,7 @@ docs = [
     'numpydoc>=1.8',
     'pydata-sphinx-theme>=0.16',
     'sphinx>=8.2',  # keep in sync with docs/conf.py
-    'sphinx-astropy[confv2]>=1.11',
+    'sphinx-astropy>=1.11',
     'sphinx-automodapi>=0.18',
     'sphinx-copybutton>=0.5',
 ]
