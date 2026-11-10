@@ -37,7 +37,7 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 
 [project.optional-dependencies]
 test = [
-    'pytest>=8.0',
+    'pytest>=9.0',
     'pytest-astropy-header>=0.2.2',
     'pytest-doctestplus>=1.4',
     'tox>=4.24',
@@ -78,8 +78,8 @@ namespaces = false
     'data/*',
 ]
 
-[tool.pytest.ini_options]
-minversion = "8.0"
+[tool.pytest]
+minversion = "9.0"
 testpaths = [
     'lacosmic',
     'docs',
@@ -89,6 +89,12 @@ norecursedirs = [
     'extern',
 ]
 astropy_header = true
+astropy_header_packages = [
+    'lacosmic',
+    'astropy',
+    'numpy',
+    'scipy',
+]
 doctest_plus = 'enabled'
 text_file_format = 'rst'
 addopts = [
@@ -99,7 +105,6 @@ addopts = [
     '--strict-markers',
 ]
 log_level = 'INFO'
-log_cli_level = 'INFO'
 xfail_strict = true
 filterwarnings = [
     'error',  # turn warnings into exceptions
@@ -107,11 +112,9 @@ filterwarnings = [
 
 [tool.coverage.run]
 omit = [
-    'lacosmic/conftest.py',
     'lacosmic/tests/*',
     'lacosmic/*/tests/*',
     'lacosmic/version*',
-    '*/lacosmic/conftest.py',
     '*/lacosmic/tests/*',
     '*/lacosmic/*/tests/*',
     '*/lacosmic/version*',
@@ -183,7 +186,6 @@ exclude = [
     '__init__',
     '\._.*',  # private functions/methods
     '^test_*',  # test code
-    '^conftest.*$',  # pytest configuration
 ]
 
 [tool.ruff]
@@ -214,10 +216,6 @@ inline-quotes = 'single'
     'D104',  # undocumented-public-package
     'I',  # isort
     'RUF100',  # unused-noqa
-]
-'conftest.py' = [
-    'D103',  # undocumented-public-function
-    'I001',  # isort
 ]
 'docs/conf.py' = [
     'ERA001',  # commented-out-code
