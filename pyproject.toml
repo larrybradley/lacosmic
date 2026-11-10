@@ -39,6 +39,7 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 test = [
     'pytest>=9.0',
     'pytest-astropy-header>=0.2.2',
+    'pytest-cov>=7.0',
     'pytest-doctestplus>=1.4',
 ]
 docs = [
@@ -88,6 +89,8 @@ norecursedirs = [
     'docs/_build',
 ]
 astropy_header = true
+# Packages whose versions are shown in the pytest header. Keep this
+# list in sync with the dependencies above.
 astropy_header_packages = [
     'lacosmic',
     'astropy',
