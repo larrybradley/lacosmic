@@ -16,6 +16,9 @@ New Features
 Bug Fixes
 ^^^^^^^^^
 
+- The deprecated ``lacosmic`` function can again be imported from the
+  package with ``from lacosmic import lacosmic``. [#96]
+
 API Changes
 ^^^^^^^^^^^
 
