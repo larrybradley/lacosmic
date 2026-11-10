@@ -86,7 +86,6 @@ testpaths = [
 ]
 norecursedirs = [
     'docs/_build',
-    'extern',
 ]
 astropy_header = true
 astropy_header_packages = [
@@ -213,7 +212,6 @@ inline-quotes = 'single'
 '__init__.py' = [
     'D104',  # undocumented-public-package
     'I',  # isort
-    'RUF100',  # flake8 needs the F401 noqa on star imports, ruff does not
 ]
 'docs/conf.py' = [
     'ERA001',  # commented-out-code

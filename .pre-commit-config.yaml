@@ -34,10 +34,10 @@ repos:
         # Replace double-quoted strings with single-quoted strings.
       - id: end-of-file-fixer
         # Makes sure files end in a newline and only a newline.
-        exclude: '.*(svg.*|extern.*|_templates.*)$'
+        exclude: '.*svg.*$'
       - id: trailing-whitespace
         # Trims trailing whitespace.
-        exclude: '.*(data.*|extern.*)$'
+        exclude: '.*data.*$'
 
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
@@ -55,7 +55,7 @@ repos:
         # Enforce that all noqa annotations always occur with specific codes.
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 'v0.17.3'
+    rev: v0.17.4
     hooks:
       - id: ruff-check
         args: ['--fix', '--show-fixes']
@@ -70,13 +70,23 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
-        additional_dependencies: [toml]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 7.5.0
     hooks:
       - id: flake8
-        args: ['--ignore', 'E501,W503']
+
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: v1.32.0
+    hooks:
+      - id: zizmor
+
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.9.10
+    hooks:
+      - id: prettier
+        types_or: [css, json, yaml, markdown]
+        args: ['--single-quote']
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.3
@@ -99,27 +109,9 @@ repos:
   #   hooks:
   #     - id: docformatter
   #       args: [--in-place, --config, ./pyproject.toml]
-  #       exclude: "extern/"
-
-  - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.31.1
-    hooks:
-      - id: zizmor
 
   - repo: https://github.com/sphinx-contrib/sphinx-lint
     rev: v1.0.2
     hooks:
       - id: sphinx-lint
         exclude: 'docs/_build/'
-
-  - repo: https://github.com/rbubley/mirrors-prettier
-    rev: v3.9.10
-    hooks:
-      - id: prettier
-        types_or: [css, rst, json, yaml, toml, markdown]
-        args: ['--single-quote']
-        # Exclude codeql.yml, dependabot.yml
-        exclude: |
-          (?x)^(
-            (.*\/)?(codeql\.yml|dependabot\.yml)$
-          )

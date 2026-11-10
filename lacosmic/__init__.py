@@ -11,7 +11,7 @@ except ImportError:
 
 
 from . import core
-from .core import *  # noqa: F401, F403
+from .core import *  # noqa: F403
 
 
 def __getattr__(name):
