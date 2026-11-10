@@ -40,7 +40,6 @@ test = [
     'pytest>=9.0',
     'pytest-astropy-header>=0.2.2',
     'pytest-doctestplus>=1.4',
-    'tox>=4.24',
 ]
 docs = [
     'matplotlib>=3.10',
@@ -54,6 +53,7 @@ docs = [
 dev = [
     'lacosmic[docs,test]',
     'pre-commit>=4.0',
+    'tox>=4.24',
 ]
 
 [build-system]
@@ -64,7 +64,7 @@ requires = [
 build-backend = 'setuptools.build_meta'
 
 [tool.setuptools_scm]
-write_to = 'lacosmic/version.py'
+version_file = 'lacosmic/version.py'
 
 [tool.setuptools]
 zip-safe = false
@@ -112,23 +112,21 @@ filterwarnings = [
 
 [tool.coverage.run]
 omit = [
-    'lacosmic/tests/*',
-    'lacosmic/*/tests/*',
+    'lacosmic/__init__*',
+    'lacosmic/**/conftest.py',
+    'lacosmic/**/tests/*',
     'lacosmic/version*',
-    '*/lacosmic/tests/*',
-    '*/lacosmic/*/tests/*',
+    '*/lacosmic/__init__*',
+    '*/lacosmic/**/conftest.py',
+    '*/lacosmic/**/tests/*',
     '*/lacosmic/version*',
 ]
 
 [tool.coverage.report]
 exclude_lines = [
     'pragma: no cover',
-    'except ImportError',
-    'raise AssertionError',
     'raise NotImplementedError',
     'def main\\(.*\\):',
-    'pragma: py{ignore_python_version}',
-    'def _ipython_key_completions_',
 ]
 
 [tool.isort]
@@ -141,6 +139,8 @@ known_first_party = [
 use_parentheses = true
 
 [tool.black]
+# Exclude every file so that black never reformats the code if an
+# editor or another tool runs it. This project does not use black.
 force-exclude = """
 (
   .*
@@ -173,11 +173,11 @@ checks = [
     'all',   # report on all checks, except the below
     'ES01',  # missing extended summary
     'EX01',  # missing "Examples"
+    'RT01',  # do not require return type for lazy properties
+    'RT02',  # only type in "Returns" section (no name)
     'SA01',  # missing "See Also"
     'SA04',  # missing "See Also" description
-    'RT02',  # only type in "Returns" section (no name)
     'SS06',  # single-line summary
-    'RT01',  # do not require return type for lazy properties
 ]
 
 # don't report on objects that match any of these regex;
@@ -197,8 +197,6 @@ ignore = [
     'ANN',  # type annotations
     'D200',  # unnecessary-multiline-docstring
     'D205',  # missing-blank-line-after-summary
-    'FBT002',  # boolean-default-value-positional-argument
-    'PLC0415',  # import-outside-top-level
     'PLR0913',  # too-many-arguments
     'PLR0917',  # too-many-positional-arguments
     'PTH',  # Pathlib usage
@@ -215,7 +213,7 @@ inline-quotes = 'single'
 '__init__.py' = [
     'D104',  # undocumented-public-package
     'I',  # isort
-    'RUF100',  # unused-noqa
+    'RUF100',  # flake8 needs the F401 noqa on star imports, ruff does not
 ]
 'docs/conf.py' = [
     'ERA001',  # commented-out-code
