@@ -37,10 +37,10 @@ Documentation = 'https://lacosmic.readthedocs.io/en/stable/'
 
 [project.optional-dependencies]
 test = [
-    'pytest>=8.0',
+    'pytest>=9.0',
     'pytest-astropy-header>=0.2.2',
+    'pytest-cov>=7.0',
     'pytest-doctestplus>=1.4',
-    'tox>=4.24',
 ]
 docs = [
     'matplotlib>=3.10',
@@ -54,6 +54,7 @@ docs = [
 dev = [
     'lacosmic[docs,test]',
     'pre-commit>=4.0',
+    'tox>=4.24',
 ]
 
 [build-system]
@@ -64,7 +65,7 @@ requires = [
 build-backend = 'setuptools.build_meta'
 
 [tool.setuptools_scm]
-write_to = 'lacosmic/version.py'
+version_file = 'lacosmic/version.py'
 
 [tool.setuptools]
 zip-safe = false
@@ -78,17 +79,24 @@ namespaces = false
     'data/*',
 ]
 
-[tool.pytest.ini_options]
-minversion = "8.0"
+[tool.pytest]
+minversion = "9.0"
 testpaths = [
     'lacosmic',
     'docs',
 ]
 norecursedirs = [
     'docs/_build',
-    'extern',
 ]
 astropy_header = true
+# Packages whose versions are shown in the pytest header. Keep this
+# list in sync with the dependencies above.
+astropy_header_packages = [
+    'lacosmic',
+    'astropy',
+    'numpy',
+    'scipy',
+]
 doctest_plus = 'enabled'
 text_file_format = 'rst'
 addopts = [
@@ -99,7 +107,6 @@ addopts = [
     '--strict-markers',
 ]
 log_level = 'INFO'
-log_cli_level = 'INFO'
 xfail_strict = true
 filterwarnings = [
     'error',  # turn warnings into exceptions
@@ -107,25 +114,21 @@ filterwarnings = [
 
 [tool.coverage.run]
 omit = [
-    'lacosmic/conftest.py',
-    'lacosmic/tests/*',
-    'lacosmic/*/tests/*',
+    'lacosmic/__init__*',
+    'lacosmic/**/conftest.py',
+    'lacosmic/**/tests/*',
     'lacosmic/version*',
-    '*/lacosmic/conftest.py',
-    '*/lacosmic/tests/*',
-    '*/lacosmic/*/tests/*',
+    '*/lacosmic/__init__*',
+    '*/lacosmic/**/conftest.py',
+    '*/lacosmic/**/tests/*',
     '*/lacosmic/version*',
 ]
 
 [tool.coverage.report]
 exclude_lines = [
     'pragma: no cover',
-    'except ImportError',
-    'raise AssertionError',
     'raise NotImplementedError',
     'def main\\(.*\\):',
-    'pragma: py{ignore_python_version}',
-    'def _ipython_key_completions_',
 ]
 
 [tool.isort]
@@ -138,6 +141,8 @@ known_first_party = [
 use_parentheses = true
 
 [tool.black]
+# Exclude every file so that black never reformats the code if an
+# editor or another tool runs it. This project does not use black.
 force-exclude = """
 (
   .*
@@ -170,11 +175,11 @@ checks = [
     'all',   # report on all checks, except the below
     'ES01',  # missing extended summary
     'EX01',  # missing "Examples"
+    'RT01',  # do not require return type for lazy properties
+    'RT02',  # only type in "Returns" section (no name)
     'SA01',  # missing "See Also"
     'SA04',  # missing "See Also" description
-    'RT02',  # only type in "Returns" section (no name)
     'SS06',  # single-line summary
-    'RT01',  # do not require return type for lazy properties
 ]
 
 # don't report on objects that match any of these regex;
@@ -183,7 +188,6 @@ exclude = [
     '__init__',
     '\._.*',  # private functions/methods
     '^test_*',  # test code
-    '^conftest.*$',  # pytest configuration
 ]
 
 [tool.ruff]
@@ -195,8 +199,6 @@ ignore = [
     'ANN',  # type annotations
     'D200',  # unnecessary-multiline-docstring
     'D205',  # missing-blank-line-after-summary
-    'FBT002',  # boolean-default-value-positional-argument
-    'PLC0415',  # import-outside-top-level
     'PLR0913',  # too-many-arguments
     'PLR0917',  # too-many-positional-arguments
     'PTH',  # Pathlib usage
@@ -213,11 +215,6 @@ inline-quotes = 'single'
 '__init__.py' = [
     'D104',  # undocumented-public-package
     'I',  # isort
-    'RUF100',  # unused-noqa
-]
-'conftest.py' = [
-    'D103',  # undocumented-public-function
-    'I001',  # isort
 ]
 'docs/conf.py' = [
     'ERA001',  # commented-out-code

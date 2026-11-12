@@ -30,7 +30,8 @@ repository is called ``origin``.
 #. As an extra check, run the tests locally using ``tox`` to thoroughly
    test the code in isolated environments::
 
-        tox -e test-alldeps -- --remote-data
+        tox -e test
+        tox -e <oldest_py>-test-oldestdeps
         tox -e build_docs
         tox -e linkcheck
 
@@ -152,22 +153,22 @@ to the repository.
         cd dist
         tar xvfz <file>.tar.gz
         cd <file>
-        tox -e test-alldeps -- --remote-data
+        tox -e test
         tox -e build_docs
 
    Optionally, install and test the source distribution in a virtual
    environment::
 
         <install and activate virtual environment>
-        pip install -e '.[all,test]'
-        pytest --remote-data
+        pip install -e '.[test]'
+        pytest
 
    or::
 
         <install and activate virtual environment>
-        pip install '../<file>.tar.gz[all,test]'
+        pip install '../<file>.tar.gz[test]'
         cd <any-directory-outside-of-lacosmic-source>
-        pytest --pyargs lacosmic --remote-data
+        pytest --pyargs lacosmic
 
 #. Check out the ``main`` branch, go back to the package root directory,
    and remove the generated files with::

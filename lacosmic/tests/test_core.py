@@ -8,8 +8,8 @@ import pytest
 from astropy.utils.exceptions import AstropyDeprecationWarning
 from numpy.testing import assert_allclose, assert_array_equal
 
-from lacosmic import remove_cosmics
-from lacosmic.core import lacosmic
+import lacosmic as lacosmic_package
+from lacosmic import lacosmic, remove_cosmics
 
 size = 25
 npts = 20
@@ -123,3 +123,13 @@ def test_lacosmic_deprecated():
     expected = remove_cosmics(CR_IMG, 1, 40, 50, error=ERROR)
     assert_array_equal(result[0], expected[0])
     assert_array_equal(result[1], expected[1])
+
+
+def test_missing_attribute():
+    """
+    Test that accessing a missing package attribute raises an
+    AttributeError.
+    """
+    match = "module 'lacosmic' has no attribute 'missing'"
+    with pytest.raises(AttributeError, match=match):
+        _ = lacosmic_package.missing
