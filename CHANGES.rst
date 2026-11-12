@@ -4,11 +4,11 @@
 General
 ^^^^^^^
 
-- The minimum required Python version is 3.12. [#90]
+- The minimum required Python is now 3.12. [#90]
 
-- The minimum required SciPy version is 1.15. [#94]
+- The minimum required SciPy is now 1.15. [#94]
 
-- The minimum required Astropy version is 7.0. [#94]
+- The minimum required Astropy is now 7.0. [#94]
 
 New Features
 ^^^^^^^^^^^^
@@ -29,11 +29,11 @@ API Changes
 General
 ^^^^^^^
 
-- The minimum required NumPy version is 2.0. [#59]
+- The minimum required NumPy is now 2.0. [#59]
 
-- The minimum required SciPy version is 1.13. [#59]
+- The minimum required SciPy is now 1.13. [#59]
 
-- The minimum required Astropy version is 6.1. [#59]
+- The minimum required Astropy is now 6.1. [#59]
 
 API Changes
 ^^^^^^^^^^^
@@ -53,13 +53,13 @@ General
 - The ``lacosmic.test`` function has been removed. Instead, use the
   ``pytest --pyarg lacosmic`` command. [#25]
 
-- The minimum required Python version is 3.11. [#26, #47]
+- The minimum required Python is now 3.11. [#26, #47]
 
-- The minimum required NumPy version is 1.26. [#26, #47]
+- The minimum required NumPy is now 1.26. [#26, #47]
 
-- The minimum required SciPy version is 1.12. [#26, #47]
+- The minimum required SciPy is now 1.12. [#26, #47]
 
-- The minimum required Astropy version is 6.0. [#26, #47, #49]
+- The minimum required Astropy is now 6.0. [#26, #47, #49]
 
 
 1.2.0 (2025-07-07)
@@ -77,13 +77,13 @@ General
 General
 ^^^^^^^
 
-- The minimum required Python version is 3.9. [#19]
+- The minimum required Python is now 3.9. [#19]
 
-- The minimum required NumPy version is 1.22. [#19]
+- The minimum required NumPy is now 1.22. [#19]
 
-- The minimum required SciPy version is 1.7.2. [#19]
+- The minimum required SciPy is now 1.7.2. [#19]
 
-- The minimum required Astropy version is 5.0. [#19]
+- The minimum required Astropy is now 5.0. [#19]
 
 - The project metadata is now stored in ``pyproject.toml`` (PEP 621).
   [#19]
@@ -95,13 +95,13 @@ General
 General
 ^^^^^^^
 
-- The minimum required Python version is 3.8. [#11]
+- The minimum required Python is now 3.8. [#11]
 
-- The minimum required NumPy version is 1.18. [#11]
+- The minimum required NumPy is now 1.18. [#11]
 
-- The minimum required SciPy version is 1.6.0. [#11]
+- The minimum required SciPy is now 1.6.0. [#11]
 
-- The minimum required Astropy version is 4.1. [#11]
+- The minimum required Astropy is now 4.1. [#11]
 
 
 0.1.1 (2016-08-16)
